@@ -22,6 +22,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="hr.zbc.remainder.BucketList"
+            android:label="@string/title_activity_buket_list"
+            android:parentActivityName="hr.zbc.remainder.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="hr.zbc.remainder.MainActivity" />
+        </activity>
+        <activity
+            android:name="hr.zbc.remainder.FilePicking"
+            android:label="@string/title_activity_file_picking"
+            android:parentActivityName="hr.zbc.remainder.BucketList" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="hr.zbc.remainder.BucketList" />
+        </activity>
     </application>
 
 </manifest>
