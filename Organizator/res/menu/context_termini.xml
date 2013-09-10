@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/mUredi"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/uredi"/>
+
+    <item
+        android:id="@+id/mKopiraj"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/kopiraj"/>
+
+    <item
+        android:id="@+id/mObrisi"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/obrisi"/>
+    
+
+</menu>

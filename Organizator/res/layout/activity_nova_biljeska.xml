@@ -1,0 +1,57 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".NovaBiljeska" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+    	android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvNovaBiljeskaDatum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" 
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="3dp"
+            android:layout_gravity="end"/>
+
+        <EditText
+            android:id="@+id/etNovaBiljeskaNaslov"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/nova_biljeska_naslov"
+            android:singleLine="true"
+            android:ems="10" >
+        </EditText>
+        
+    </LinearLayout>
+
+    <EditText
+    android:id="@+id/etNovaBiljeskaSadrzaj"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    android:scrollbars="vertical"
+    android:fadingEdge="vertical"
+    android:textSize="20sp"
+    android:gravity="top"
+    android:linksClickable="true"
+    
+ 	android:hint="@string/nova_biljeska_sadrzaj" >
+
+        <requestFocus />
+    </EditText>
+    
+<!--  
+    <Button
+        android:id="@+id/bNovaBiljeskaSpremi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/spremi"/>
+-->
+
+</LinearLayout>

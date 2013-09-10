@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/mTerminiPregledUredi"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/uredi"/>
+
+    <item
+        android:id="@+id/mTerminiPregledKopiraj"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/kopiraj"/>
+
+    <item
+        android:id="@+id/mTerminiPregledObrisi"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/obrisi"/>
+
+</menu>

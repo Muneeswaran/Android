@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- https://github.com/android/platform_frameworks_base/blob/master/core/res/res/values/colors.xml -->
+    <eat-comment />
+
+    <!-- A light Holo shade of blue -->
+    <color name="holo_blue_light">#ff33b5e5</color>
+    <!-- A light Holo shade of green -->
+    <color name="holo_green_light">#ff99cc00</color>
+    <!-- A light Holo shade of red -->
+    <color name="holo_red_light">#ffff4444</color>
+    <!-- A dark Holo shade of blue -->
+    <color name="holo_blue_dark">#ff0099cc</color>
+    <!-- A dark Holo shade of green -->
+    <color name="holo_green_dark">#ff669900</color>
+    <!-- A dark Holo shade of red -->
+    <color name="holo_red_dark">#ffcc0000</color>
+    <!-- A Holo shade of purple -->
+    <color name="holo_purple">#ffaa66cc</color>
+    <!-- A light Holo shade of orange -->
+    <color name="holo_orange_light">#ffffbb33</color>
+    <!-- A dark Holo shade of orange -->
+    <color name="holo_orange_dark">#ffff8800</color>
+    <!-- A really bright Holo shade of blue -->
+    <color name="holo_blue_bright">#ff00ddff</color>
+    
+    <!-- http://developer.android.com/design/style/color.html#palette -->
+    <color name="svijetlo_plavo">#33B5E5</color>
+    <color name="tamno_plavo">#0099CC</color>
+    <color name="svijetlo_ljubicasto">#AA66CC</color>
+    <color name="tamno_ljubicasto">#9933CC</color>
+    <color name="svijetlo_zeleno">#99CC00</color>
+    <color name="tamno_zeleno">#669900</color>
+    <color name="svijetlo_narancasto">#FFBB33</color>
+    <color name="tamno_narancasto">#FF8800</color>
+    <color name="svijetlo_crveno">#FF4444</color>
+    <color name="tamno_crveno">#CC0000</color>
+    
+    <color name="bijelo">#FFFFFF</color>
+    
+</resources>

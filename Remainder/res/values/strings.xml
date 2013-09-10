@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Remainder</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="welcome">Welcome to Remainder</string>
+    <string name="bucket_list">Bucket list</string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
+    
+
+</resources>

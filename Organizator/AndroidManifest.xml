@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="hr.diplomski.organizator"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="hr.diplomski.organizator.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="hr.diplomski.organizator.NovaBiljeska"
+            android:label="@string/title_activity_nova_biljeska"
+            android:parentActivityName="hr.diplomski.organizator.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="hr.diplomski.organizator.MainActivity" />
+        </activity>
+        <activity
+            android:name="hr.diplomski.organizator.Biljeske"
+            android:label="@string/title_activity_biljeske"
+            android:parentActivityName="hr.diplomski.organizator.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="hr.diplomski.organizator.MainActivity" />
+        </activity>
+        <activity
+            android:name="hr.diplomski.organizator.DriveTest"
+            android:label="@string/title_activity_drive_test"
+            android:parentActivityName="hr.diplomski.organizator.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="hr.diplomski.organizator.MainActivity" />
+        </activity>
+        <activity
+            android:name="hr.diplomski.organizator.Kontakti"
+            android:label="@string/title_activity_kontakti"
+            android:parentActivityName="hr.diplomski.organizator.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="hr.diplomski.organizator.MainActivity" />
+        </activity>
+        <activity
+            android:name="hr.diplomski.organizator.NoviKontakt"
+            android:label="@string/title_activity_novi_kontakt"
+            android:parentActivityName="hr.diplomski.organizator.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="hr.diplomski.organizator.MainActivity" />
+        </activity>
+        <activity
+            android:name="hr.diplomski.organizator.Termini"
+            android:label="@string/title_activity_termini"
+            android:parentActivityName="hr.diplomski.organizator.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="hr.diplomski.organizator.MainActivity" />
+        </activity>
+        <activity
+            android:name="hr.diplomski.organizator.NoviTermin"
+            android:label="@string/title_activity_novi_termin"
+            android:parentActivityName="hr.diplomski.organizator.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="hr.diplomski.organizator.MainActivity" />
+        </activity>
+        <activity
+            android:name="hr.diplomski.organizator.Pregled"
+            android:label="@string/title_activity_pregled"
+            android:parentActivityName="hr.diplomski.organizator.Kontakti" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="hr.diplomski.organizator.Kontakti" />
+        </activity>
+        <activity
+            android:name="hr.diplomski.organizator.Profil"
+            android:label="@string/title_activity_profil"
+            android:parentActivityName="hr.diplomski.organizator.Kontakti" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="hr.diplomski.organizator.Kontakti" />
+        </activity>
+        <activity
+            android:name="hr.diplomski.organizator.NoviKontaktPopUp"
+            android:label="@string/title_activity_novi_kontakt_pop_up"
+            android:parentActivityName="hr.diplomski.organizator.NoviKontakt"
+            android:theme="@android:style/Theme.Dialog" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="hr.diplomski.organizator.NoviKontakt" />
+        </activity>
+        <activity
+            android:name="hr.diplomski.organizator.TerminPregled"
+            android:label="@string/title_activity_termin_pregled"
+            android:parentActivityName="hr.diplomski.organizator.Termini" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="hr.diplomski.organizator.Termini" />
+        </activity>
+        <activity
+            android:name="hr.diplomski.organizator.Novci"
+            android:label="@string/title_activity_novci"
+            android:parentActivityName="hr.diplomski.organizator.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="hr.diplomski.organizator.MainActivity" />
+        </activity>
+    </application>
+
+</manifest>

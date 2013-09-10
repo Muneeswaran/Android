@@ -1,0 +1,26 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/mAbc"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/abecedno"/>
+
+    <item
+        android:id="@+id/mKreirano"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/kreiranje"/>
+    
+    <item
+        android:id="@+id/mPromjena"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/promjena"/>
+    
+    <item
+        android:id="@+id/mNovaBiljeska"
+        android:orderInCategory="200"
+        android:showAsAction="never"
+        android:title="@string/nova_biljeska"/>
+</menu>

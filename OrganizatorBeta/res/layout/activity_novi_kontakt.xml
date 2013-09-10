@@ -1,0 +1,177 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".NoviKontakt" >
+    
+<ScrollView 
+android:layout_width="match_parent"
+android:layout_height="0dp"
+android:orientation="vertical"
+android:layout_weight="9">
+
+<LinearLayout 
+android:id="@+id/llNoviKontakt"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="vertical">
+
+    <Spinner
+        android:id="@+id/sNoviKontaktAccount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/bNoviKontaktGrupe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/grupe"
+        android:onClick="klik" />
+    
+    <LinearLayout 
+    android:id="@+id/llNoviKontaktImePrezime"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    	<EditText
+        android:id="@+id/etImePrezime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textCapWords" 
+        android:singleLine="true"
+        android:hint="@string/ime_prezime">
+
+        <requestFocus />
+    </EditText>
+	</LinearLayout>
+	
+<LinearLayout 
+android:id="@+id/llNoviKontaktMobitel"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="vertical">
+    <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/etMobitel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:layout_weight="1"
+        android:inputType="phone"
+        android:hint="@string/mobitel" />
+
+        <Spinner
+            android:id="@+id/sNoviKontaktMobitel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/array_mobitel"
+    		android:background="@android:drawable/btn_default" />
+        
+    </LinearLayout>
+</LinearLayout>
+	
+    <LinearLayout 
+    android:id="@+id/llNoviKontaktEmail"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    
+    <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:layout_weight="1"
+        android:inputType="text|textEmailAddress"
+        android:hint="@string/mail" />
+
+        <Spinner
+            android:id="@+id/sNoviKontaktEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/array_mail"
+    		android:background="@android:drawable/btn_default"  />
+        
+    </LinearLayout>
+    </LinearLayout>
+	
+    <LinearLayout 
+    android:id="@+id/llNoviKontaktIM"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    
+    <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/etNoviKontaktIM"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:layout_weight="1"
+        android:hint="@string/korisnicko_ime" />
+
+        <Spinner
+            android:id="@+id/sNoviKontaktIM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:entries="@array/array_im"
+    		android:background="@android:drawable/btn_default"  />
+        
+    </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
+</ScrollView>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="10sp"
+        android:background="@color/holo_blue_dark" >
+
+        <Button
+            android:id="@+id/bNoviKSpremi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/spremi" 
+        	android:layout_weight="2" 
+        	android:onClick="klik" 
+        	android:layout_marginTop="5sp" />
+
+        <Button
+            android:id="@+id/bNoviKPlus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="+" 
+        	android:onClick="klik" 
+        	android:layout_marginTop="5sp"/>
+
+        <Button
+            android:id="@+id/bNoviKOdustani"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/odustani" 
+        	android:layout_weight="2" 
+        	android:onClick="klik" 
+        	android:layout_marginTop="5sp" />
+
+    </LinearLayout>
+</LinearLayout>

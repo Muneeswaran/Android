@@ -1,0 +1,145 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".NoviTermin" >
+    
+<!-- Sprječava iskakanje tipkovnice; nevidljivi LinearLayout dodan prije svega ostalog -->
+<LinearLayout android:focusable="true"
+ android:focusableInTouchMode="true" android:layout_width="0px"
+ android:layout_height="0px" />
+<ScrollView 
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="vertical"
+android:layout_weight="9">
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <Spinner
+        android:id="@+id/sKalendari"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/etNoviTerminNaslov"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10" 
+        android:hint="@string/naslov">
+    </EditText>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pocetak" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/bNoviTerminDatumPocetak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button" 
+            android:onClick="klik" />
+
+        <Button
+            android:id="@+id/bNoviTerminVrijemePocetak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button" 
+            android:onClick="klik" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/kraj" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/bNoviTerminDatumKraj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button" 
+            android:onClick="klik" />
+
+        <Button
+            android:id="@+id/bNoviTerminVrijemeKraj"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button" 
+            android:onClick="klik" />
+
+    </LinearLayout>
+
+    <CheckBox
+        android:id="@+id/cbNoviTerminCijeliDan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/cijeli_dan" />
+
+    <EditText
+        android:id="@+id/etNoviTerminOpis"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/opis"
+        android:maxLines="15"/>
+
+    <EditText
+        android:id="@+id/etNoviTerminLokacija"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/lokacija"
+        android:maxLines="3"/>
+
+    <EditText
+        android:id="@+id/etNoviTerminPrisustvuje"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/prisustvuje"
+        android:maxLines="3"/>
+
+</LinearLayout>
+
+</ScrollView>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="10sp"
+        android:background="@color/holo_blue_dark" 
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/bNoviTerminSpremi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/spremi" 
+        	android:layout_weight="1" 
+        	android:onClick="klik" 
+        	android:layout_marginTop="5sp" />
+
+        <Button
+            android:id="@+id/bNoviTerminOdustani"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/odustani" 
+        	android:layout_weight="1" 
+        	android:onClick="klik" 
+        	android:layout_marginTop="5sp" />
+
+    </LinearLayout>
+</LinearLayout>

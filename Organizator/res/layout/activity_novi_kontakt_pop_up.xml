@@ -1,0 +1,41 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".NoviKontaktPopUp" 
+    android:theme="@android:style/Theme.Dialog" >
+
+    <Button
+        android:id="@+id/bNoviKPopProfil"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2sp"
+        android:onClick = "klik"
+        android:text="@string/novi_kontakt_pop_profil" />
+
+    <Button
+        android:id="@+id/bNoviKPopTermin"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2sp"
+        android:onClick = "klik"
+        android:text="@string/novi_kontakt_pop_termin" />
+
+    <Button
+        android:id="@+id/bNoviKPopIzadji"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2sp"
+        android:onClick = "klik"
+        android:text="@string/novi_kontakt_pop_izadji" />
+
+    <Button
+        android:id="@+id/bNoviKPopOdustani"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2sp"
+        android:onClick = "klik"
+        android:text="@string/odustani" />
+
+</LinearLayout>

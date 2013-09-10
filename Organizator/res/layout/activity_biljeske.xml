@@ -1,0 +1,23 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Biljeske" >
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:dividerHeight="1sp" 
+        android:layout_weight="85"
+        android:footerDividersEnabled="true" />
+<!--  
+    <Button
+     	android:id="@+id/bBiljeskeNovaBiljeska"
+   		android:layout_width="match_parent"
+  		android:layout_height="wrap_content"
+     	android:onClick="klik"
+    	android:text="@string/nova_biljeska" />
+-->
+</LinearLayout>

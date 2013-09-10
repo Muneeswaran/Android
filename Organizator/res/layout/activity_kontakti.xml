@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Kontakti" >
+
+    <Button
+        android:id="@+id/bKontaktiProfil"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/profil" 
+        android:onClick="klik"
+        android:layout_marginTop="10sp"/>
+
+    <Button
+        android:id="@+id/bKontaktiNaMail"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/posalji_na_mail" 
+        android:onClick="klik"
+        android:layout_marginTop="10sp"/>
+
+    <Button
+        android:id="@+id/bKontaktiPregled"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/pregled" 
+        android:onClick="klik"
+        android:layout_marginTop="10sp"/>
+
+</LinearLayout>

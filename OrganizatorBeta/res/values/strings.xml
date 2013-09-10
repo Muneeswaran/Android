@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Organizator</string>
+    <string name="poruka">Poruka</string>
+    <string name="spremi">Spremi</string>
+    <string name="odustani">Odustani</string>
+    <string name="pozor">Pozor!</string>
+    <string name="obrisi">Obriši</string>
+    <string name="uredi">Uredi</string>
+    <string name="naslov">Naslov</string>
+    <string name="posalji">Pošalji</string>
+    <string name="opis">Opis</string>
+    <string name="kopiraj">Kopiraj</string>
+    <string name="pocetak">Početak</string>
+    <string name="kraj">Kraj</string>
+    <string name="podijeli">Podijeli</string>
+    <string name="cijeli_dan">Cijeli dan</string>
+    <string name="lokacija">Lokacija</string>
+    <string name="prisustvuje">Prisustvuje</string>
+    <string name="upisite_ime">Upišite ime</string>
+    <string name="grupe">Grupe</string>
+    <string name="nema_odabranih_grupa">Nema odabranih grupa</string>
+    <string name="grupa_ne_sadrzi_kontakte">Grupa ne sadrži kontakte</string>
+    <string name="uredi_termin">Ovaj se termin ne može urediti. Želite ga kopirati u drugi kalendar?</string>
+    <string name="nije_odabran_kontakt">Nije odabran kontakt</string>
+    <string name="obrisati_termin">Želite li obrisat termin?</string>
+    <string name="ovaj_termin_se_ne_moze_obrisati">Ovaj termin se ne može obrisati</string>
+    <string name="kontakt_je_spremljen">Kontakt je spremljen</string>
+    <string name="odbaci">Odbaci</string>
+    <string name="ime">Ime</string>
+    <string name="prezime">Prezime</string>
+    <string name="mail">E-mail</string>
+    <string name="korisnicko_ime">Korisničko ime</string>
+    <string name="mobitel">Mobitel</string>
+    <string name="profil">Profil</string>
+    <string name="pregled">Pregled</string>
+    <string name="ime_prezime">Ime Prezime</string>
+    <string name="posalji_na_mail">Pošalji na mail</string>
+    <string name="posalji_na_mobitel">Pošalji na mobitel</string>
+    <string name="novi_kontakt">Novi kontakt</string>
+    <string name="kontakti">Kontakti</string>
+    <string name="novi_kontakt_pop_profil">pošalji profil</string>
+    <string name="novi_kontakt_pop_termin">dogovori termin</string>
+    <string name="novi_kontakt_pop_izadji">izađi iz aplikacije</string>
+    <string name="novi_termin">Novi termin</string>
+    <string name="termini">Termini</string>
+    <string name="ucitani_su_dogadjaji_do">Učitani su događaji do</string>
+    <string name="ucitaj_vise">Učitaj više</string>
+    <string name="ucitaj_starije">Učitaj starije</string>
+    <string name="ucitaj_novije">Učitaj novije</string>
+    <string name="ucitaj_starije_dogadjaje">Učitaj starije događaje</string>
+    <string name="ucitaj_novije_dogadjaje">Učitaj novije događaje</string>
+    <string name="nova_biljeska">Nova bilješka</string>
+    <string name="biljeske">Bilješke</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_nova_biljeska">Nova biljeska</string>
+    <string name="nova_biljeska_naslov">Naslov</string>
+    <string name="nova_biljeska_sadrzaj">Sadržaj</string>
+    <string name="title_activity_biljeske">Bilješke</string>
+    <string name="spremanje_biljeske">Želite li spremiti bilješku?</string>
+    <string name="abecedno">abc</string>
+    <string name="kreiranje">Kreirano</string>
+    <string name="promjena">Promijenjeno</string>
+    <string name="title_activity_drive_test">Drive test</string>
+    <string name="title_activity_kontakti">Kontakti</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_novi_kontakt">Novi kontakt</string>
+    <string name="title_activity_termini">Termini</string>
+    <string name="title_activity_novi_termin">Novi termin</string>
+    <string name="title_activity_pregled">Pregled</string>
+    <string name="title_activity_profil">Profil</string>
+    <string name="title_activity_novi_kontakt_pop_up">Spremi i...</string>
+
+    <string-array name="array_mobitel">
+        <item>Mobitel</item>
+        <item>Kuća</item>
+        <item>Posao</item>
+        <item>Ostalo</item>
+    </string-array>
+    <string-array name="array_mail">
+        <item>Kuća</item>
+        <item>Posao</item>
+        <item>Ostalo</item>
+    </string-array>
+    <string-array name="array_im">
+        <item>Twitter</item>
+        <item>LinkedIn</item>
+        <item>Gmail</item>
+        <item>Facebook</item>
+        <item>Skype</item>
+        <item>Outlook</item>
+        <item>Yahoo!</item>
+        <item>Jabber</item>
+        <item>ICQ</item>
+        <item>Jabber</item>
+        <item>QQ</item>
+        <item>AIM</item>
+        <item>Ostalo</item>
+    </string-array>
+
+    <string name="title_activity_termin_pregled">Termin</string>
+
+</resources>

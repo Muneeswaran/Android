@@ -1,0 +1,202 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Profil" >
+
+<!-- Sprječava iskakanje tipkovnice; nevidljivi LinearLayout dodan prije svega ostalog -->
+<LinearLayout android:focusable="true"
+ android:focusableInTouchMode="true" android:layout_width="0px"
+ android:layout_height="0px" />
+<ScrollView 
+android:layout_width="match_parent"
+android:layout_height="0dp"
+android:orientation="vertical"
+android:layout_weight="9">
+
+<LinearLayout 
+android:id="@+id/llProfil"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="vertical">
+    
+    <LinearLayout 
+    android:id="@+id/llProfilImePrezime"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    	<EditText
+        android:id="@+id/etProfilImePrezime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textCapWords" 
+        android:singleLine="true"
+        android:hint="@string/ime_prezime">
+
+        <requestFocus />
+    </EditText>
+	</LinearLayout>
+	
+<LinearLayout 
+android:id="@+id/llProfilMobitel"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="vertical">
+    <LinearLayout 
+    android:id="@+id/llProfilM"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <Button 
+        android:id="@+id/bProfilNoviMobitel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:text="+"
+        android:onClick="klik"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/etProfilMobitel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/mobitel" 
+        android:layout_weight="1"
+        android:singleLine="true">
+    </EditText>
+
+    <Spinner
+        android:id="@+id/sProfilMobitel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:entries="@array/array_mobitel"
+        android:background="@android:drawable/btn_default"/>
+        
+    </LinearLayout>
+</LinearLayout>
+	
+    <LinearLayout 
+    android:id="@+id/llProfilEmail"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    
+    <LinearLayout 
+    android:id="@+id/llProfilE"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <Button 
+        android:id="@+id/bProfilNoviEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:text="+"
+        android:onClick="klik"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/etProfilEmail"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="E-mail" 
+        android:layout_weight="1"
+        android:singleLine="true">
+    </EditText>
+
+    <Spinner
+        android:id="@+id/sProfilEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:entries="@array/array_mail"
+        android:background="@android:drawable/btn_default"/>
+        
+    </LinearLayout>
+    </LinearLayout>
+	
+    <LinearLayout 
+    android:id="@+id/llProfilIM"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    
+    <LinearLayout 
+    android:id="@+id/llProfilI"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <Button 
+        android:id="@+id/bProfilNoviIM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="1dp"
+        android:layout_marginRight="1dp"
+        android:text="+"
+        android:onClick="klik"
+        android:textSize="20sp"/>
+
+    <EditText
+        android:id="@+id/etProfilIM"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/korisnicko_ime" 
+        android:layout_weight="1"
+        android:singleLine="true">
+    </EditText>
+
+    <Spinner
+        android:id="@+id/sProfilIM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:entries="@array/array_im"
+        android:background="@android:drawable/btn_default"/>
+        
+    </LinearLayout>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/etProfilPoruka"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:hint="@string/poruka" />
+
+</LinearLayout>
+</ScrollView>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="10sp"
+        android:background="@color/holo_blue_dark" >
+
+        <Button
+            android:id="@+id/bProfilSpremi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/spremi" 
+        	android:layout_weight="2" 
+        	android:onClick="klik" 
+        	android:layout_marginTop="5sp" />
+
+        <Button
+            android:id="@+id/bProfilOdustani"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/odustani" 
+        	android:layout_weight="2" 
+        	android:onClick="klik" 
+        	android:layout_marginTop="5sp" />
+
+    </LinearLayout>
+</LinearLayout>
