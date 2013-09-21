@@ -7,6 +7,6 @@
 
   android:layout_width="fill_parent"
 
-     android:layout_height="25px"
+     android:layout_height="35dp"
 
      android:textSize="23sp" />
