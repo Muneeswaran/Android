@@ -11,6 +11,8 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
 
+
+// Ovo sam izbacio. Ideja je bila da se pritiskom na tipku '+' dobije pop-up prozor s tim opcijama
 public class NoviKontaktPopUp extends Activity {
 
 	Intent data = new Intent();

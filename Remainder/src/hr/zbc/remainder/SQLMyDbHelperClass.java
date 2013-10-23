@@ -1,12 +1,11 @@
 package hr.zbc.remainder;
 
 import android.content.Context;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-public class MyDbHelperClass extends SQLiteOpenHelper{
+public class SQLMyDbHelperClass extends SQLiteOpenHelper{
 
 	public static final String TABLE_BUCKET_LIST = "bucket_list";
 	public static final String COLUMN_ID = "_id";
@@ -21,7 +20,7 @@ public class MyDbHelperClass extends SQLiteOpenHelper{
 			+ " integer primary key autoincrement, " + COLUMN_QUOTE
 			+ " text not null, " + COLUMN_USED + " integer default 0);";
 
-	public MyDbHelperClass(Context context){
+	public SQLMyDbHelperClass(Context context){
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 		
 	}
@@ -34,9 +33,11 @@ public class MyDbHelperClass extends SQLiteOpenHelper{
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-	    Log.w(MyDbHelperClass.class.getName(),
+	   /*
+		Log.w(SQLMyDbHelperClass.class.getName(),
 	            "Upgrading database from version " + oldVersion + " to "
 	                + newVersion + ", which will destroy all old data");
+	    */
 	        db.execSQL("DROP TABLE IF EXISTS " + TABLE_BUCKET_LIST);
 	        onCreate(db);
 	}

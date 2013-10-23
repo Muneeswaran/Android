@@ -42,9 +42,6 @@ import android.provider.CalendarContract.Attendees;
 import android.provider.CalendarContract.Calendars;
 import android.provider.CalendarContract.Events;
 
-/*import android.provider.CalendarContract;
-import java.util.List;
-import android.widget.TextView;*/
 
 public class NoviTermin extends Activity {
 	
@@ -82,16 +79,6 @@ public class NoviTermin extends Activity {
 		
 		extra = new Bundle();
 		extra = (getIntent().getExtras() == null) ? null : getIntent().getExtras();
-		
-		
-		//idEvent = (savedInstanceState == null) ? null : (Long) savedInstanceState.getSerializable("ID");
-		/*if(idEvent == null){
-			extra = new Bundle();
-			extra = getIntent().getExtras();
-			idEvent = extra != null ? extra.getLong("ID") : null;
-		}*/
-			
-		
 		verzija = android.os.Build.VERSION.SDK_INT;
 		inicijalzacijaSucelja();
 		verzijaAndroida();
@@ -111,8 +98,6 @@ public class NoviTermin extends Activity {
 		prefMapKalendari = new HashMap<String, Object>(preferences.getAll());
 		if(!prefMapKalendari.keySet().isEmpty() && !listaSvihKalendara.isEmpty()){
 			Log.d("NOVI TERMIN", "Ušao u IF");
-			// Ovo ne valja ovdje mi poziva Dijalog
-			//odabirKalendara(listaSvihKalendara.toArray(new String[listaSvihKalendara.size()]), new ArrayList<String>(prefMapKalendari.keySet()));
 			ArrayList<String> temp = new ArrayList<String>(prefMapKalendari.keySet());
 			Collections.sort(temp, new Comparator<String>() {
 				@Override
@@ -147,12 +132,14 @@ public class NoviTermin extends Activity {
 		}
 	}
 	
+	@SuppressLint("SimpleDateFormat")
 	private void postaviTipkePocetak() {
 		tipkaDatumPocetak.setText("   " + new SimpleDateFormat("E").format(pocetakCal.getTime()) + ", " + new SimpleDateFormat("dd/MM/yyyy").format(pocetakCal.getTime()) + "   ");
 		tipkaVrijemePocetak.setText("   " + new SimpleDateFormat("HH:mm").format(pocetakCal.getTime()) + "   ");
 		
 	}
 
+	@SuppressLint("SimpleDateFormat")
 	private void postaviTipkeKraj() {
 		tipkaDatumKraj.setText("   " + new SimpleDateFormat("E").format(krajCal.getTime()) + ", " + new SimpleDateFormat("dd/MM/yyyy").format(krajCal.getTime()) + "   ");
 		tipkaVrijemeKraj.setText("   " + new SimpleDateFormat("HH:mm").format(krajCal.getTime()) + "   ");
@@ -165,18 +152,12 @@ public class NoviTermin extends Activity {
         String selection;
         
 		if(verzija <= 10){
-			//String[] projection = new String[] { "_id", "name" };
-	        //String path = "calendars";
 	        selection = "selected=1 AND access_level=700";
-	        /*
-	        Cursor managedCursor = getCalendarManagedCursor(null, selection,
-	                path);
-	        */
 	        cur = getContentResolver().query(uriCalendar, null, selection, null, null);
 	        
 	        if (cur != null && cur.moveToFirst()) {
 
-	            Log.i(DEBUG_TAG, "Listing Selected Calendars Only");
+	            //Log.i(DEBUG_TAG, "Listing Selected Calendars Only");
 
 	            int nameColumn = cur.getColumnIndex("name");
 	            int idColumn = cur.getColumnIndex("_id");
@@ -184,23 +165,17 @@ public class NoviTermin extends Activity {
 	            do {
 	                String calName = cur.getString(nameColumn);
 	                String calId = cur.getString(idColumn);
-	                Log.i(DEBUG_TAG, "Found Calendar '" + calName + "' (ID="
-	                        + calId + ")");
+	                //Log.i(DEBUG_TAG, "Found Calendar '" + calName + "' (ID="
+	                       // + calId + ")");
 	                imeKalendara.add(calName);
 	                idKalendara.add(calId);
-	                /*
-	                if (calName != null && calName.contains("Test")) {
-	                    result = Integer.parseInt(calId);
-	                }
-	                */
 	            } while (cur.moveToNext());
 	        } else {
 	        	Uri uri = Calendars.CONTENT_URI;   
 	        	selection = "OWNER_ACCESS=700 AND SELECTED=selected";
-	        	// Submit the query and get a Cursor object back. 
 	        	cur = getContentResolver().query(uri, null, selection, null, null);
 	        	if (cur != null && cur.moveToFirst()) {
-	        		Log.i(DEBUG_TAG, "Listing Selected Calendars Only");
+	        		//Log.i(DEBUG_TAG, "Listing Selected Calendars Only");
 
 		            int nameColumn = cur.getColumnIndex("name");
 		            int idColumn = cur.getColumnIndex("_id");
@@ -208,15 +183,9 @@ public class NoviTermin extends Activity {
 		            do {
 		                String calName = cur.getString(nameColumn);
 		                String calId = cur.getString(idColumn);
-		                Log.i(DEBUG_TAG, "Found Calendar '" + calName + "' (ID="
-		                        + calId + ")");
+		                // Log.i(DEBUG_TAG, "Found Calendar '" + calName + "' (ID="+ calId + ")");
 		                imeKalendara.add(calName);
 		                idKalendara.add(calId);
-		                /*
-		                if (calName != null && calName.contains("Test")) {
-		                    result = Integer.parseInt(calId);
-		                }
-		                */
 		            } while (cur.moveToNext());
 	        	}
 	        }
@@ -232,22 +201,17 @@ public class NoviTermin extends Activity {
 			String selection = "access_level=?";
 			String[] selectionArgs = new String[] {"700"};
 			String[] projection = new String[]{"_id", "name"};
-			//mapaSvihKalendara = new HashMap<Long, String>();
 			mapaSvihKalendara = new HashMap<String, Long>();
 			try {
 				cur = getContentResolver().query(uriCalendar, projection, selection, selectionArgs, null);
 				if(cur.moveToFirst()){
-					//sviKalendari = new String[cur.getCount()];
-					//int i = 0;
 					int id = cur.getColumnIndex("_id");
 					int calName = cur.getColumnIndex("name");
 					do{
-						//mapaSvihKalendara.put(cur.getLong(id), cur.getString(calName));
 						mapaSvihKalendara.put(cur.getString(calName), cur.getLong(id));
 					}while(cur.moveToNext());
 				}
 			} catch (Exception e) {
-				// TODO: handle exception
 			}
 			rez = new ArrayList<String>(mapaSvihKalendara.keySet());
 			Collections.sort(rez, new Comparator<String>() {
@@ -273,14 +237,12 @@ public class NoviTermin extends Activity {
 				izborKalendara[i] = odabraniKalendari.contains(kalendari[i]);
 			}
 		}else{
-			// Cijeli Arry se napuni s odabranom vrijednošæu
 			Arrays.fill(izborKalendara, false);
 		}
 		DialogInterface.OnMultiChoiceClickListener listenerKalendari = new DialogInterface.OnMultiChoiceClickListener() {
 			
 			@Override
 			public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-				// TODO Auto-generated method stub
 				if(isChecked){
 					odabraniKalendari.add(kalendari[which]);
 				}else{
@@ -353,11 +315,9 @@ public class NoviTermin extends Activity {
 			uriAttendee = Uri.parse("content://com.android.calendar/attendees");
 		}else {
 			uriCalendar = Calendars.CONTENT_URI;
-			//uriEvent = CalendarContract.Events.CONTENT_URI;
 			uriEvent = Events.CONTENT_URI;
 			uriAttendee = Attendees.CONTENT_URI;
 		}
-		//android.os.Build.VERSION_CODES.GINGERBREAD
 		
 	}
 
@@ -398,46 +358,21 @@ public class NoviTermin extends Activity {
 		case R.id.bNoviTerminSpremi:
 			
 			try {
-				//noviDogadjaj(4);
-				
-	            // ListAllCalendarDetails();
-				
-	            // will return the last found calendar with "Test" in the name
-	            //int iTestCalendarID = ListSelectedCalendars();
-	            //int iTestCalendarID = 2;
-	            
-	            // change this when you know which calendar you want to use
-	            // If you create a new calendar, you may need to manually sync the
-	            // phone first
 	            if (imeKalendara != null) {
-	            	
-	            	//String odabraniKalendar = idKalendara.get(izborKalendara.getSelectedItemPosition());
-	                //Uri newEvent2 = MakeNewCalendarEntry2(4);
 	            	//-----------------------------------------------------------------------------------------------------------------------
 	            	String odabraniKalendar = String.valueOf(mapaSvihKalendara.get(izborKalendara.getSelectedItem()));
 	            	//-----------------------------------------------------------------------------------------------------------------------
 	            	Uri newEvent2 = noviDogadjaj(Integer.parseInt(odabraniKalendar));
 	                int eventID2 = Integer.parseInt(newEvent2.getLastPathSegment());
-	                //ListCalendarEntry(eventID2);
-	                
-	                //Uri newEvent = MakeNewCalendarEntry(iTestCalendarID);
-	                //int eventID = Integer.parseInt(newEvent.getLastPathSegment());
-	                //ListCalendarEntry(eventID);
-
-	                //UpdateCalendarEntry(eventID);
-	                //ListCalendarEntrySummary(eventID);
-	                //DeleteCalendarEntry(eventID);
-	                //ListCalendarEntrySummary(eventID);
-	               // ListAllCalendarEntries(iTestCalendarID);
 	                finish();
 	            } else {
-	                Log.i(DEBUG_TAG, "No 'Test' calendar found.");
+	               // Log.i(DEBUG_TAG, "No 'Test' calendar found.");
 	            }
 
-	            Log.i(DEBUG_TAG, "Ending Calendar Test");
+	            //Log.i(DEBUG_TAG, "Ending Calendar Test");
 	            
 	        } catch (Exception e) {
-	            Log.e(DEBUG_TAG, "General failure", e);
+	            //Log.e(DEBUG_TAG, "General failure", e);
 	        }
 			
 			break;
@@ -465,7 +400,6 @@ public class NoviTermin extends Activity {
 		}
 	}
 	
-	//http://jennifer-androidworld.blogspot.in/2012/02/datepickerdialog-timepickerdialog-in.html
 	private DatePickerDialog.OnDateSetListener odsl = new DatePickerDialog.OnDateSetListener()
     {
 
@@ -590,6 +524,7 @@ public class NoviTermin extends Activity {
             
             // Ne bih trebao hard kodirati poruku veæ napraviti string
 			Toast.makeText(getApplicationContext(), "Dogaðaj spremljen", Toast.LENGTH_SHORT).show();
+			finish();
         }
         else{
             event.put(Events.CALENDAR_ID, calId);
@@ -598,50 +533,12 @@ public class NoviTermin extends Activity {
 
             event.put(Events.DTSTART, pocetakCal.getTimeInMillis());
             event.put(Events.DTEND, krajCal.getTimeInMillis());
-            //event.put("allDay", 0); // 0 for false, 1 for true
-            //event.put("eventStatus", 1);
-            //event.put("visibility", 0);
-            //event.put("transparency", 0);
-            //event.put("hasAlarm", 0); // 0 for false, 1 for true
 
             insertedUri = getContentResolver().insert(uriEvent, event);
 			Toast.makeText(getApplicationContext(), "Dogaðaj spremljen", Toast.LENGTH_SHORT).show();
         	
         }
         return insertedUri;
-        
-        /*
-         * Novi dogaðaj za 4.0
-         * http://developer.android.com/guide/topics/providers/calendar-provider.html#add-event
-        long calID = 3;
-        long startMillis = 0; 
-        long endMillis = 0;     
-        Calendar beginTime = Calendar.getInstance();
-        beginTime.set(2012, 9, 14, 7, 30);
-        startMillis = beginTime.getTimeInMillis();
-        Calendar endTime = Calendar.getInstance();
-        endTime.set(2012, 9, 14, 8, 45);
-        endMillis = endTime.getTimeInMillis();
-        ...
-
-        ContentResolver cr = getContentResolver();
-        ContentValues values = new ContentValues();
-        values.put(Events.DTSTART, startMillis);
-        values.put(Events.DTEND, endMillis);
-        values.put(Events.TITLE, "Jazzercise");
-        values.put(Events.DESCRIPTION, "Group workout");
-        values.put(Events.CALENDAR_ID, calID);
-        values.put(Events.EVENT_TIMEZONE, "America/Los_Angeles");
-        Uri uri = cr.insert(Events.CONTENT_URI, values);
-
-        // get the event ID that is the last element in the Uri
-        long eventID = Long.parseLong(uri.getLastPathSegment());
-        // 
-        // ... do something with event ID
-        //
-        //
-         * 
-         */
 	}
 
 	/**

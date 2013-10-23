@@ -1,27 +1,18 @@
 package hr.zbc.remainder;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Random;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class ActMain extends Activity {
 	
 	static int REQ_CODE = 1024;
-	AlarmConfigurator alarmConfig = new AlarmConfigurator(this);
+	ClaAlarmConfigurator alarmConfig = new ClaAlarmConfigurator(this);
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +60,7 @@ public class MainActivity extends Activity {
 	public void klik(View v){
 		switch (v.getId()) {
 		case R.id.bMainBucket:
-			startActivity(new Intent(this, BucketList.class));
+			startActivity(new Intent(this, ActBucketList.class));
 			break;
 		case R.id.bMainSettings:
 			

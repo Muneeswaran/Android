@@ -64,16 +64,6 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract;
 
-/*import android.content.ClipData.Item;
-import android.provider.ContactsContract.CommonDataKinds.StructuredName;
-import android.provider.ContactsContract.Contacts;
-import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.provider.Contacts.Groups;
-import android.provider.ContactsContract.CommonDataKinds;
-import android.os.DropBoxManager.Entry;
-import java.util.ResourceBundle.Control;
-import java.util.Iterator;
-import java.util.List;*/
 
 public class Pregled extends Activity implements OnItemClickListener, OnAccountsUpdateListener {
 
@@ -91,7 +81,6 @@ public class Pregled extends Activity implements OnItemClickListener, OnAccounts
     private AccountAdapter mAccountAdapter;
     private AccountData mSelectedAccount;
     Map<Long, Set<String>> mapa = new HashMap<Long, Set<String>>();
-    //List<String> izabraniKontakti = new ArrayList<String>();
     Set<String> izabraniKontakti = new HashSet<String>();
 
 	@Override
@@ -113,8 +102,6 @@ public class Pregled extends Activity implements OnItemClickListener, OnAccounts
 		lv1.setOnItemClickListener(this);
 		lv1.setTextFilterEnabled(true);
 		//lv1.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-		
-		//ispisiKontakte();
 		
 	}
 	
@@ -146,94 +133,32 @@ public class Pregled extends Activity implements OnItemClickListener, OnAccounts
 
 	private void ispisiKontakte() {
 		try {
-		
-		//cursor = dohvatiKontakte(); 
-		//cursor =  dohvatiGrupe();
-			/*
-			   String[] projection = new String[] {
-					   ContactsContract.Groups._ID,
-					   ContactsContract.Groups.TITLE,
-					   ContactsContract.Groups.SUMMARY_COUNT
-			   };
-		String sortOrder = ContactsContract.Contacts.DISPLAY_NAME 
-                + " COLLATE LOCALIZED ASC ";
-                
-		cursor = getContentResolver().query(ContactsContract.Groups.CONTENT_SUMMARY_URI, projection,
-                null, null, null);
-		*/
-			/*
-			   String[] projection = new String[] {
-					   Data._ID,
-					   Data.DISPLAY_NAME,
-					   ContactsContract.CommonDataKinds.GroupMembership.GROUP_ROW_ID
-			   };
-			   
-			   cursor = getContentResolver().query(Data.CONTENT_URI, projection,
-		                GroupMembership.GROUP_ROW_ID + "=8", null, null);
-			*/
-			//cursor = dohvatiGrupe();
-		
-		// Radi, ali bolje pogledaj malo više o Adapterima i Cursorima
-		adapter.clear();
-		String ime;
-		int i = 0;
-		Log.i("Cursor2", "Broj ovdje: " + cursor.getCount());
-		if (cursor.moveToFirst()){
-			do{
-				//ime = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.GroupMembership.GROUP_ROW_ID));
-				//ime = cursor.getString(cursor.getColumnIndex("ACCOUNT_NAME"));
-				//ime = cursor.getString(cursor.getColumnIndex(android.provider.ContactsContract.Groups.TITLE)) + " : " + cursor.getString(cursor.getColumnIndex(android.provider.ContactsContract.Groups.SUMMARY_COUNT));
-				ime = cursor.getString(cursor.getColumnIndex(android.provider.ContactsContract.Groups.TITLE));
-				adapter.add(ime);
-				
-				i++;
-				//Log.i("Test", cursor.getString(cursor.getColumnIndex("title")) + " : " 
-						//+ cursor.getString(cursor.getColumnIndex(ContactsContract.Groups._ID)) + " : " );
-				
-				//Log.e(TAG, "ID unutar petlje: " + cursor.getPosition());
-				Log.d("GRUPE" , "Ime: "  + cursor.getString(cursor.getColumnIndex(ContactsContract.Groups.TITLE)) 
-						+ "\nID: " + cursor.getString(cursor.getColumnIndex("_id"))
-						+ "\nACCOUNT_NAME: " + cursor.getString(cursor.getColumnIndex(ContactsContract.Groups.ACCOUNT_NAME))
-						+ "\nACCOUNT_TYPE: " + cursor.getString(cursor.getColumnIndex(ContactsContract.Groups.ACCOUNT_TYPE)));
-			} while (cursor.moveToNext());
+			adapter.clear();
+			String ime;
+			int i = 0;
+			//Log.i("Cursor2", "Broj ovdje: " + cursor.getCount());
+			if (cursor.moveToFirst()){
+				do{
+					ime = cursor.getString(cursor.getColumnIndex(android.provider.ContactsContract.Groups.TITLE));
+					adapter.add(ime);
+
+					i++;
+					//Log.i("Test", cursor.getString(cursor.getColumnIndex("title")) + " : " 
+					//+ cursor.getString(cursor.getColumnIndex(ContactsContract.Groups._ID)) + " : " );
+
+					//Log.e(TAG, "ID unutar petlje: " + cursor.getPosition());
+					/*Log.d("GRUPE" , "Ime: "  + cursor.getString(cursor.getColumnIndex(ContactsContract.Groups.TITLE)) 
+							+ "\nID: " + cursor.getString(cursor.getColumnIndex("_id"))
+							+ "\nACCOUNT_NAME: " + cursor.getString(cursor.getColumnIndex(ContactsContract.Groups.ACCOUNT_NAME))
+							+ "\nACCOUNT_TYPE: " + cursor.getString(cursor.getColumnIndex(ContactsContract.Groups.ACCOUNT_TYPE)));*/
+				} while (cursor.moveToNext());
+			}
+
+		} catch (Exception ex) {
+			
 		}
-		// Ne smije ga zatvoriti jer ga još trebam u onItemClick()
-		//cursor.close();
-		
-		/* Radi, ali treba dugo; http://stackoverflow.com/questions/1721279/how-to-read-contacts-on-android-2-0?rq=1
-		 * 
-		Cursor cursor = getContentResolver().query(ContactsContract.Contacts.CONTENT_URI,null, null, null, null); 
-		
-		while (cursor.moveToNext()) {
-			String contactId = cursor.getString(cursor.getColumnIndex( 
-				   				ContactsContract.Contacts._ID)); 
-		   //String hasPhone = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER)); 
-		      Cursor phones = getContentResolver().query( ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID +" = "+ contactId, null, null); 
-		      Log.e(TAG, "Phone");
-		      while (phones.moveToNext()) { 
-		         String phoneNumber = phones.getString(phones.getColumnIndex( ContactsContract.CommonDataKinds.Phone.NUMBER));
-		         adapter.add(phoneNumber);
-		         Log.e(TAG, phoneNumber);
-		      }
-		   phones.close(); 
-		   
-		   Cursor emails = getContentResolver().query(ContactsContract.CommonDataKinds.Email.CONTENT_URI, null, ContactsContract.CommonDataKinds.Email.CONTACT_ID + " = " + contactId, null, null); 
-		   while (emails.moveToNext()) { 
-		      // This would allow you get several email addresses 
-		      String emailAddress = emails.getString( 
-		      emails.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA)); 
-		      adapter.add(emailAddress);
-		      Log.e(TAG, emailAddress);
-		   } 
-		   emails.close();
-		}
-		cursor.close(); */
-		
-	} catch (Exception ex) {
-		//Log.d(TAG, ex.toString());
 	}
-	}
-	
+
 	
 	private Cursor dohvatiGrupe() {
 		Uri uri = ContactsContract.Groups.CONTENT_URI;
@@ -241,12 +166,6 @@ public class Pregled extends Activity implements OnItemClickListener, OnAccounts
 		
 		String[] projection = new String[] {
 				ContactsContract.Groups._ID, ContactsContract.Groups.TITLE, ContactsContract.Groups.SUMMARY_COUNT};
-				
-		/*
-		String[] projection = new String[] {
-				ContactsContract.Groups._ID, ContactsContract.Groups.TITLE};
-		*/
-		//Na drugo mjesto staviti projection; null je jer želim pogeldati koje stupce sadrži
 		return getContentResolver().query(uri, null, "ACCOUNT_NAME=? AND ACCOUNT_TYPE=?", 
 				new String[] {mSelectedAccount.getName(), mSelectedAccount.getType()}, null);
 	}
@@ -255,289 +174,18 @@ public class Pregled extends Activity implements OnItemClickListener, OnAccounts
 		switch(v.getId()){
 		case R.id.bPregledOk:
 			if(izabraniKontakti.size()>0){
-				/*String[] str = izabraniKontakti.toArray(new String[0]);
-				int count = str.length;
-				String where = "";
-				for(int i = 0; i<count-1; i++){
-					where += Data.DISPLAY_NAME + "=? OR ";
-				}
-				where += Data.DISPLAY_NAME + "=?";
-				Cursor c = getContentResolver().query(Phone.CONTENT_URI, null, where, str, Data.DISPLAY_NAME + " COLLATE LOCALIZED ASC");
-				Set<String> popis = new LinkedHashSet<String>();
-				//List<String> popis = new ArrayList<String>();
-				Map<String, Set<String>> konacnaMapa = new LinkedHashMap<String, Set<String>>();
-				//Map<String, List<String>> konacnaMapa = new LinkedHashMap<String, List<String>>();
-				if(c.moveToFirst()){
-					int ime = c.getColumnIndex("display_name");
-					int broj = c.getColumnIndex(Phone.NUMBER);
-					int brojVrsta = c.getColumnIndex(Phone.TYPE);
-					int label = c.getColumnIndex(Phone.LABEL);
-					String prethodni = "";
-					String unos;
-					do{
-						if(!prethodni.equals(c.getString(ime))){
-							if(!prethodni.equals("")){
-								konacnaMapa.put(prethodni, popis);
-								//popis = new ArrayList<String>();
-								popis = new LinkedHashSet<String>();
-								Log.d("Mapa", "Spremio mapu: " + prethodni + " Velièina: " + popis.size());
-							}
-							Log.i("Prethodni", "Prethodni: " + prethodni);
-							prethodni = c.getString(ime);
-							if(c.getString(broj) != null){
-								unos = Phone.getTypeLabel(this.getResources(), c.getInt(brojVrsta), c.getString(label)) + ": " + c.getString(broj);
-								popis.add(unos);
-								Log.d("Kontakt1", "Spremio kontakt: " + Phone.getTypeLabel(this.getResources(), c.getInt(brojVrsta), c.getString(label)) + ": " + c.getString(broj) );
-							}
-							// Treba riješiti što s kontaktima ako nemaju broj
-						}else{
-							if(c.getString(broj) != null){
-								unos = Phone.getTypeLabel(this.getResources(), c.getInt(brojVrsta), c.getString(label)) + ": " + c.getString(broj);
-								popis.add(unos);
-								Log.d("Kontakt2", "Spremio kontakt: " + Phone.getTypeLabel(this.getResources(), c.getInt(brojVrsta), c.getString(label)) + ": " + c.getString(broj) );
-							}
-						}
-					}while(c.moveToNext());
-					konacnaMapa.put(prethodni, popis);
-					Log.d("Mapa3", "Spremio mapu: " + prethodni + " Velièina: " + popis.size());
-				}
-				
-				c = getContentResolver().query(Email.CONTENT_URI, null, where, str, Data.DISPLAY_NAME + " COLLATE LOCALIZED ASC");
-				if(c.moveToFirst()){
-					int ime = c.getColumnIndex("display_name");
-					int mail = c.getColumnIndex(Email.DATA);
-					int mailVrsta = c.getColumnIndex(Email.TYPE);
-					int labelm = c.getColumnIndex(Email.LABEL);
-					String unos;
-					String prethodni = "";
-					do{
-						if(!prethodni.equals(c.getString(ime))){
-							if(!prethodni.equals("")){
-								konacnaMapa.put(prethodni, popis);
-								popis = new LinkedHashSet<String>();
-							}
-							prethodni = c.getString(ime);
-							if(konacnaMapa.containsKey(prethodni)){
-								popis = konacnaMapa.get(prethodni);
-							}else {
-								popis = new LinkedHashSet<String>();
-							}
-							if(c.getString(mail) != null){
-								unos = Email.getTypeLabel(this.getResources(), c.getInt(mailVrsta), c.getString(labelm)) + ": " + c.getString(mail);
-								popis.add(unos);
-							}
-						}else {
-							if(c.getString(mail) != null){
-								unos = Email.getTypeLabel(this.getResources(), c.getInt(mailVrsta), c.getString(labelm)) + ": " + c.getString(mail);
-								popis.add(unos);
-							}
-						}
-					}while(c.moveToNext());
-					konacnaMapa.put(prethodni, popis);
-					}
-				
-				// http://www.higherpass.com/Android/Tutorials/Working-With-Android-Contacts/
-				// http://stackoverflow.com/questions/15243205/cant-get-the-email-address-from-contactscontract
-				//c = getContentResolver().query(Data.CONTENT_URI, null, ContactsContract.Data.MIMETYPE + "=" + ContactsContract.CommonDataKinds.Im.CONTENT_ITEM_TYPE + " AND " + where, str, Data.DISPLAY_NAME + " COLLATE LOCALIZED ASC");
-				//where = where + " AND " + ContactsContract.Data.MIMETYPE + "=?"; 
-				//+ ContactsContract.CommonDataKinds.Im.CONTENT_ITEM_TYPE;
-				//String[] params = new String[str.length];
-				//params = str;
-				//params[str.length-1] = ContactsContract.CommonDataKinds.Im.CONTENT_ITEM_TYPE;
-				c = getContentResolver().query(Data.CONTENT_URI, null, where , str, Data.DISPLAY_NAME + " COLLATE LOCALIZED ASC");
-				Log.i("Pregled", "Query je prošao");
-				if(c.moveToFirst()){
-					int ime = c.getColumnIndex("display_name");
-					int instant = c.getColumnIndex(Im.DATA);
-					int imVrsta = c.getColumnIndex(Im.PROTOCOL);
-					int labelm = c.getColumnIndex(Im.CUSTOM_PROTOCOL);
-					String unos;
-					String prethodni = "";
-					int i = 0;
-					do{
-						Log.i("Pregled", "IF: " + i++);
-						if(!prethodni.equals(c.getString(ime))){
-							if(!prethodni.equals("")){
-								konacnaMapa.put(prethodni, popis);
-								popis = new LinkedHashSet<String>();
-							}
-							prethodni = c.getString(ime);
-							if(konacnaMapa.containsKey(prethodni)){
-								popis = konacnaMapa.get(prethodni);
-							}else {
-								popis = new LinkedHashSet<String>();
-							}
-							// iz nekog razloga dohvaæa opet sve (ime, broj,...), a pod imVrsta stavlja 'AIM'
-							// na Android stranici za AIM stoji da je vrijednost 0; ne prikazuje AIM account
-							if((c.getString(instant) != null) && (c.getInt(imVrsta) != 0)){
-								//unos = Im.getTypeLabel(this.getResources(), c.getInt(imVrsta), c.getString(labelm)) + ": " + c.getString(instant);
-								//unos = c.getString(labelm) + ": " + c.getString(instant);
-								unos = Im.getProtocolLabel(this.getResources(), c.getInt(imVrsta), c.getString(labelm)) + ": " + c.getString(instant);
-								popis.add(unos);
-							}
-						}else {
-							if((c.getString(instant) != null) && (c.getInt(imVrsta) != 0)){
-								//unos = Im.getTypeLabel(this.getResources(), c.getInt(imVrsta), c.getString(labelm)) + ": " + c.getString(instant);
-								//unos = c.getString(labelm) + ": " + c.getString(instant);
-								unos = Im.getProtocolLabel(this.getResources(), c.getInt(imVrsta), c.getString(labelm)) + ": " + c.getString(instant);
-								popis.add(unos);
-							}
-						}
-					}while(c.moveToNext());
-					konacnaMapa.put(prethodni, popis);
-					}
-				
-					String textMail = "";
-					String kljuc;
-					
-					List<String> imena = new ArrayList<String>(konacnaMapa.keySet());
-					//Set imena = new HashSet<String>(konacnaMapa.keySet());
-					java.util.Collections.sort(imena);
-					
-					
-					for(String temp : imena){
-						textMail += temp + "\n";
-						String[] konacniKontakti = konacnaMapa.get(temp).toArray(new String[0]);
-						for(int i = 0; i<konacniKontakti.length; i++){
-							textMail += konacniKontakti[i] + "\n";
-						}
-						textMail += "\n";
-						
-					}
-					
-					for(Map.Entry<String, Set<String>> entry : konacnaMapa.entrySet()){
-						textMail += entry.getKey() + "\n";
-						//Set<String> konacniSet = new HashSet<String>(entry.getValue());
-						//String[] konacniKontakti = new String[konacniSet.size()];
-						//konacniKontakti = konacniSet.toArray(new String[0]);
-						String[] konacniKontakti = entry.getValue().toArray(new String[0]);
-						for(int i = 0; i<konacniKontakti.length; i++){
-							textMail += konacniKontakti[i] + "\n";
-						}
-						textMail += "\n";
-					}
-					
-					for(HashMap.Entry<String, Set<String>> par: konacnaMapa.entrySet()){
-						popis.clear();
-						kljuc = par.getKey();
-						Set<String> kontakti = par.getValue();
-						textMail += kljuc + "\n";
-						String[] vrijednosti = kontakti.toArray(new String[0]);
-						for(int i = 0; i<vrijednosti.length; i++){
-							textMail += vrijednosti[i] + "\n";
-					}
-					
-					Intent in = new Intent(Intent.ACTION_SEND);
-					in.setType("plain/text");
-					in.putExtra(Intent.EXTRA_EMAIL  , new String[]{""});
-					in.putExtra(Intent.EXTRA_SUBJECT, "Moji kontakt podatci");
-					in.putExtra(Intent.EXTRA_TEXT   , textMail);
-					startActivity(in);*/
 				KontaktiVCard stringKarta = new KontaktiVCard(this);
 				stringKarta.posaljiString(izabraniKontakti);
 				finish();
-					
-				
-				
-				
-				//c.moveToLast();
-				//Log.d("Odabrano", "Ime: " + c.getString(c.getColumnIndex("display_name")) + " Broj: " + c.getString(c.getColumnIndex(Phone.NUMBER)));
 			}else{
 				Toast.makeText(this, R.string.nije_odabran_kontakt, Toast.LENGTH_SHORT).show();
 			}
 			break;
 		case R.id.bPregledCancel:
-			//finish();
 			if(izabraniKontakti.size()>0){
 				KontaktiVCard vKarta = new KontaktiVCard(this);
 				vKarta.posaljiVCard(izabraniKontakti);
 				finish();
-				/*final String vFileAdresa = "organizator-kontakti.vcf";
-				
-				String[] str = izabraniKontakti.toArray(new String[0]);
-				int count = str.length;
-				String where = "";
-				for(int i = 0; i<count-1; i++){
-					where += Data.DISPLAY_NAME + "=? OR ";
-				}
-				where += Data.DISPLAY_NAME + "=?";
-				Cursor c = getContentResolver().query(Contacts.CONTENT_URI, null, where, str, Data.DISPLAY_NAME + " COLLATE LOCALIZED ASC");
-				
-				// Uvijek isto za vCard na Stacku
-				// http://stackoverflow.com/questions/12046936/android-how-to-save-contacts-to-sdcard-as-vcard-without-duplicates?rq=1
-				// http://stackoverflow.com/questions/8035841/how-to-get-android-contacts-in-vcard-format-using-android-native-api
-				// http://stackoverflow.com/questions/8701727/extract-contact-list-in-vcf-format
-				if(c.moveToFirst()){
-                    //String path = Environment.getExternalStorageDirectory().toString() + File.separator + "organizator-kontakti-"+i+".vcf";
-					// Provjerava da li veæ postoji file s tim imenom
-					String path = Environment.getExternalStorageDirectory().toString() + File.separator + vFileAdresa;
-					File file = new File(path);
-					int brojFile = 1;
-                	for(int i = 1; i<=5; i++){
-                    	file = new File(Environment.getExternalStorageDirectory().toString() + File.separator + "organizator-kontakti-"+i+".vcf");
-                		brojFile = i;
-                    	if(!file.exists()){
-                    		path = Environment.getExternalStorageDirectory().toString() + File.separator + "organizator-kontakti-"+ i +".vcf";
-                    		// Postavljeno na 6 da ne bi ulazio na sljedeæi 'if'
-                    		brojFile = 6;
-                    		break;
-                    	}
-                	}
-                	if(brojFile==5){
-                		//file = new File(Environment.getExternalStorageDirectory().toString() + File.separator + "organizator-kontakti-"+brojFile+".vcf");
-                		path = Environment.getExternalStorageDirectory().toString() + File.separator + "organizator-kontakti-"+ brojFile +".vcf";
-                		file = new File(path);
-                		file.delete();
-                	}
-                	
-                    //String path = vFileAdresa;
-                    String vCard = "";
-					do{
-				        String lookupKey = c.getString(c.getColumnIndex(Contacts.LOOKUP_KEY));
-				        Uri uri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_VCARD_URI, lookupKey);
-				        AssetFileDescriptor fd;
-				        try {
-			                fd = getContentResolver()
-			                        .openAssetFileDescriptor(uri, "r");
-			                FileInputStream fis = fd.createInputStream();
-			                byte[] b = new byte[(int) fd.getDeclaredLength()];
-			                fis.read(b);
-			                //vCard = new String(b);
-			                vCard += new String(b);
-			                //Log.i("---Test---", vCard);
-							
-						} catch (Exception e) {
-							// TODO: handle exception
-						}
-					}while(c.moveToNext());
-                    try {
-						FileOutputStream mFileOutputStream = new FileOutputStream(path, true);
-                    	//FileOutputStream mFileOutputStream = openFileOutput(path, Context.MODE_WORLD_READABLE);
-						mFileOutputStream.write(vCard.toString().getBytes());
-						mFileOutputStream.close();
-						
-						Intent emailIntent = new Intent(Intent.ACTION_SEND);
-						emailIntent.setType("plain/text");
-						emailIntent.putExtra(Intent.EXTRA_EMAIL  , "");
-						emailIntent.putExtra(Intent.EXTRA_SUBJECT, "");
-						emailIntent.putExtra(Intent.EXTRA_TEXT   , "");
-						//Uri uriMail = Uri.parse(path);
-						//emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(new File(path)));
-						emailIntent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
-						startActivity(Intent.createChooser(emailIntent, "..."));
-						
-						file.deleteOnExit();
-						
-					} catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}finally{
-						finish();
-					}
-				}*/
 				
 			}else{
 				Toast.makeText(this, R.string.nije_odabran_kontakt, Toast.LENGTH_SHORT).show();
@@ -637,7 +285,7 @@ public class Pregled extends Activity implements OnItemClickListener, OnAccounts
      * OnAccountsUpdateListener implementation.
      */
     public void onAccountsUpdated(Account[] a) {
-        Log.i(TAG, "Account list update detected");
+        //Log.i(TAG, "Account list update detected");
         // Clear out any old data to prevent duplicates
         mAccounts.clear();
 
@@ -651,8 +299,8 @@ public class Pregled extends Activity implements OnItemClickListener, OnAccounts
             String systemAccountType = a[i].type;
 
             
-            Log.i(TAG, "a: " + a[i]);
-            Log.i(TAG, "systemAccountType(tj. 'a[i].type'): " + systemAccountType + "\nAccountType: " + accountTypes[i]);
+            //Log.i(TAG, "a: " + a[i]);
+            //Log.i(TAG, "systemAccountType(tj. 'a[i].type'): " + systemAccountType + "\nAccountType: " + accountTypes[i]);
             
             if (systemAccountType.equals("com.google")) {
 				AuthenticatorDescription ad = getAuthenticatorDescription(
@@ -676,7 +324,7 @@ public class Pregled extends Activity implements OnItemClickListener, OnAccounts
             AuthenticatorDescription[] dictionary) {
         for (int i = 0; i < dictionary.length; i++) {
             if (dictionary[i].type.equals(type)) {
-            	Log.i(TAG, "Dictionary: " + dictionary[i]);
+            	//Log.i(TAG, "Dictionary: " + dictionary[i]);
                 return dictionary[i];
             }
         }
@@ -695,7 +343,7 @@ public class Pregled extends Activity implements OnItemClickListener, OnAccounts
 		mapa.clear();
 		izabraniKontakti.clear();
 		ispisiKontakte();
-		Log.i("Cursor", "Broj kontakta: " + cursor.getCount());
+		//Log.i("Cursor", "Broj kontakta: " + cursor.getCount());
     }
 
     /**

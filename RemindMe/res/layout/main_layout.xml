@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/LinearLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ActMainActivity" >
+
+    <TextView
+        android:id="@+id/tvMainWelcome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="26dp"
+        android:text="@string/welcome" />
+
+    <ListView
+        android:id="@+id/lvMainLists"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+        android:layout_weight="9">
+    </ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:orientation="horizontal"
+        >
+    
+    <Button
+        android:id="@+id/bMainFind"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/find_file" 
+        android:onClick="importClick"
+        android:layout_weight="1"/>
+    
+    <Button
+        android:id="@+id/bMainPick"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/pick_file" 
+        android:onClick="importClick"
+        android:layout_weight="1"/>
+    </LinearLayout>
+    
+
+</LinearLayout>

@@ -3,17 +3,11 @@ package hr.zbc.remainder;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import org.apache.commons.io.FileUtils;
-
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -22,7 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 // http://android-er.blogspot.com/2010/01/implement-simple-file-explorer-in.html
-public class FilePicking extends Activity implements OnItemClickListener{
+public class ActFilePicking extends Activity implements OnItemClickListener{
 
  private List<String> item = null;
  private List<String> path = null;

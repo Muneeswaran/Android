@@ -17,11 +17,10 @@ import android.text.InputType;
 import android.annotation.TargetApi;
 import android.content.SharedPreferences;
 import android.os.Build;
-//import android.text.Editable;
-//import android.text.TextWatcher;
+
 
 public class Profil extends Activity {
-	
+
 	SharedPreferences profil;
 	SharedPreferences.Editor e;
 	public static String PROFIL_PREFS = "hr.diplomski.organizator.PROFIL";
@@ -43,22 +42,22 @@ public class Profil extends Activity {
 	boolean noviMobitel = true;
 	boolean noviMail = true;
 	boolean noviIM = true;
-	
-	
+
+
 	EditText ime, broj, email, twitter, poruka, edt;
 	Spinner sMobitel, sMail, sIM, spn;
 	Button btn;
 	LinearLayout llMobitel, llEmail, llIM;
 	View layoutMob;
 	LayoutInflater inflater;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profil);
 		// Show the Up button in the action bar.
 		setupActionBar();
-		
+
 		profil = getSharedPreferences(PROFIL_PREFS, MODE_PRIVATE);
 		e = profil.edit();
 		init();
@@ -77,7 +76,7 @@ public class Profil extends Activity {
 		twitter = (EditText) findViewById(R.id.etProfilIM);
 		twitter.setId(staticETIM);
 		poruka = (EditText) findViewById(R.id.etProfilPoruka);
-		
+
 		//Spinner
 		sMobitel = (Spinner) findViewById(R.id.sProfilMobitel);
 		sMobitel.setId(staticSMob);
@@ -85,7 +84,7 @@ public class Profil extends Activity {
 		sMail.setId(staticSEmail);
 		sIM = (Spinner) findViewById(R.id.sProfilIM);
 		sIM.setId(staticSIM);
-		
+
 		//Button
 		btn = (Button) findViewById(R.id.bProfilNoviMobitel);
 		btn.setId(staticBMob);
@@ -93,47 +92,28 @@ public class Profil extends Activity {
 		btn.setId(staticBEmail);
 		btn = (Button) findViewById(R.id.bProfilNoviIM);
 		btn.setId(staticBIM);
-		
+
 		// Layouti
 		inflater = getLayoutInflater();
 		llMobitel = (LinearLayout) findViewById(R.id.llProfilMobitel);
 		llEmail = (LinearLayout) findViewById(R.id.llProfilEmail);
 		llIM = (LinearLayout) findViewById(R.id.llProfilIM);
-		
+
 		layoutMob = (LinearLayout) findViewById(R.id.llProfilM);
 		layoutMob.setId(staticLLMob);
 		layoutMob = (LinearLayout) findViewById(R.id.llProfilE);
 		layoutMob.setId(staticLLEmail);
 		layoutMob = (LinearLayout) findViewById(R.id.llProfilI);
 		layoutMob.setId(staticLLIM);
-		
-		
-		/*ime = (EditText) findViewById(R.id.etProfilIme);
-		prezime = (EditText) findViewById(R.id.etProfilPrezime);
-		broj = (EditText) findViewById(R.id.etProfilMobitel);
-		email = (EditText) findViewById(R.id.etProfilEmail);
-		twitter = (EditText) findViewById(R.id.etProfilTwitter);
-		poruka = (EditText) findViewById(R.id.etProfilPoruka);*/
-		
-		//dohvaæanje teksta iz Shared Preferencesa
-		/*ime.setText(profil.getString("ime", ""));
-		prezime.setText(profil.getString("prezime", ""));
-		broj.setText(profil.getString("broj", ""));
-		email.setText(profil.getString("email", ""));
-		twitter.setText(profil.getString("twitter", ""));
-		poruka.setText(profil.getString("poruka", ""));*/
-		
+
 	}
 
 	public void klik(View v){
 		int id = v.getId();
 		switch(id){
 		case R.id.bProfilSpremi:
-			//e.clear().commit();
 			e.putString("ime", ime.getText().toString());
-			
-			//e.putString("broj", null);
-			//e.putString("broj_spinner", null);
+
 			String spremitiEDT = new String();
 			String spremitiSPN = new String();
 			String text = new String();
@@ -155,7 +135,7 @@ public class Profil extends Activity {
 			}
 			e.putString("broj", spremitiEDT);
 			e.putString("broj_spinner", spremitiSPN);
-			
+
 			spremitiEDT = new String();
 			spremitiSPN = new String();
 			text = new String();
@@ -174,7 +154,7 @@ public class Profil extends Activity {
 			}
 			e.putString("email", spremitiEDT);
 			e.putString("email_spinner", spremitiSPN);
-			
+
 			spremitiEDT = new String();
 			spremitiSPN = new String();
 			text = new String();
@@ -193,35 +173,12 @@ public class Profil extends Activity {
 			}
 			e.putString("im", spremitiEDT);
 			e.putString("im_spinner", spremitiSPN);
-			
+
 			e.putString("poruka", poruka.getText().toString());
-			
+
 			e.commit();
 			finish();
-			
-			
-			
-			/*String[] splity = spremitiEDT.split(";");
-			ime.setText(""+splity.length);
-			ime.append(" " + splity[0]);*/
-			
-			/*String imeS = ime.getText().toString();
-			String prezimeS = prezime.getText().toString();
-			String brojS = broj.getText().toString();
-			String emailS = email.getText().toString();
-			String twitterS = twitter.getText().toString();
-			String porukaS = poruka.getText().toString();*/
-			
-			/*e = profil.edit();
-			e.putString("ime", imeS);
-			e.putString("prezime", prezimeS);
-			e.putString("broj", brojS);
-			e.putString("email", emailS);
-			e.putString("twitter", twitterS);
-			e.putString("poruka", porukaS);
-			e.commit()*/;
-			//finish();
-			
+
 			break;
 		case R.id.bProfilOdustani:
 			finish();
@@ -239,18 +196,18 @@ public class Profil extends Activity {
 					for(int i = id+1; i<=max; i++){
 						btn = (Button) findViewById(i);
 						btn.setId(i-1);
-						
+
 						layoutMob = (LinearLayout) findViewById(90+i);
 						layoutMob.setId(90+i-1);
-						
+
 						edt = (EditText) findViewById(990+i);
 						edt.setId(990+i-1);
-						
+
 						spn = (Spinner) findViewById(1090+i);
 						spn.setId(1090+i-1);
 					}
 					iMob-=1;
-					
+
 				}
 			}else if (id>=30 && id<50) {
 				if(id==(iMail+30)){
@@ -263,20 +220,20 @@ public class Profil extends Activity {
 					for(int i = id+1; i<=max; i++){
 						btn = (Button) findViewById(i);
 						btn.setId(i-1);
-						
+
 						layoutMob = (LinearLayout) findViewById(270+i);
 						layoutMob.setId(270+i-1);
-						
+
 						edt = (EditText) findViewById(2970+i);
 						edt.setId(2970+i-1);
-						
+
 						spn = (Spinner) findViewById(3070+i);
 						spn.setId(3070+i-1);
 					}
 					iMail-=1;
-					
+
 				}
-				
+
 			}else if (id>=50 && id<70) {
 				if(id==(iIM+50)){
 					dodajIM();
@@ -288,25 +245,25 @@ public class Profil extends Activity {
 					for(int i = id+1; i<=max; i++){
 						btn = (Button) findViewById(i);
 						btn.setId(i-1);
-						
+
 						layoutMob = (LinearLayout) findViewById(450+i);
 						layoutMob.setId(450+i-1);
-						
+
 						edt = (EditText) findViewById(4950+i);
 						edt.setId(4950+i-1);
-						
+
 						spn = (Spinner) findViewById(5050+i);
 						spn.setId(5050+i-1);
 					}
 					iIM-=1;
 				}
-				
+
 			}
-			
+
 			break;
 		}
 	}
-	
+
 	private void dodajMob(){
 		if (iMob<20) {
 			++iMob;
@@ -327,9 +284,9 @@ public class Profil extends Activity {
 			spn = (Spinner) findViewById(R.id.sNoviKontaktSpinner1);
 			spn.setId(1100 + iMob);
 		}
-		
+
 	}
-	
+
 	private void dodajMail(){
 		if (iMail<20) {
 			++iMail;
@@ -357,9 +314,9 @@ public class Profil extends Activity {
 			spn.setBackgroundResource(android.R.drawable.btn_default);
 			spn.setAdapter(adapter);
 		}
-		
+
 	}
-	
+
 	private void dodajIM(){
 		if (iIM<20) {
 			++iIM;
@@ -387,9 +344,9 @@ public class Profil extends Activity {
 			spn.setBackgroundResource(android.R.drawable.btn_default);
 			spn.setAdapter(adapter);
 		}
-		
+
 	}
-	
+
 	private void podesiProfil() {
 		ime.setText(profil.getString("ime", ""));
 		if (!profil.getString("broj", "").equals("")) {
@@ -400,7 +357,6 @@ public class Profil extends Activity {
 				spn = (Spinner) findViewById(staticSMob);
 				edt.setText(sviBrojevi[0]);
 				spn.setSelection(Integer.parseInt(sviBrojeviSpinner[0]));
-				//spn.setSelection(0);
 				iMob = 0;
 				for (int i = 1; i < sviBrojevi.length; i++) {
 					dodajMob();
@@ -408,7 +364,6 @@ public class Profil extends Activity {
 					spn = (Spinner) findViewById(staticSMob + i);
 					edt.setText(sviBrojevi[i]);
 					spn.setSelection(Integer.parseInt(sviBrojeviSpinner[i]));
-					//spn.setSelection(0);
 				}
 			}
 		}
@@ -430,7 +385,7 @@ public class Profil extends Activity {
 				}
 			}
 		}
-		
+
 		if (!profil.getString("im", "").equals("")) {
 			String[] sviIm = profil.getString("im", "").split(";");
 			String[] sviImSpinner = profil.getString("im_spinner", "").split(";");
@@ -449,7 +404,7 @@ public class Profil extends Activity {
 				}
 			}
 		}
-		
+
 		poruka.setText(profil.getString("poruka", ""));
 	}
 

@@ -10,11 +10,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-public class AlarmConfigurator {
+public class ClaAlarmConfigurator {
 	
 	Context ctx;
 	
-	public AlarmConfigurator(Context context){
+	public ClaAlarmConfigurator(Context context){
 		this.ctx = context;
 	}
 	
@@ -35,22 +35,22 @@ public class AlarmConfigurator {
 		
 		long time = cal.getTimeInMillis();
 		
-        Intent intentAlarm = new Intent(ctx, AlarmReceiver.class);
+        Intent intentAlarm = new Intent(ctx, SerAlarmReceiver.class);
 		//Intent intentAlarm = new Intent("hr.zbc.remainder.AlarmService");
 		
         // create the object
         AlarmManager alarmManager = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
 
         //set the alarm for particular time
-        alarmManager.set(AlarmManager.RTC_WAKEUP,time, PendingIntent.getBroadcast(ctx,MainActivity.REQ_CODE,  intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
+        alarmManager.set(AlarmManager.RTC_WAKEUP,time, PendingIntent.getBroadcast(ctx,ActMain.REQ_CODE,  intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
 		
 		return new SimpleDateFormat("dd.MM.yyyy HH:mm").format(cal.getTime());
 	}
 	
 	protected boolean isAlarmSet(){
 		
-		if(PendingIntent.getBroadcast(ctx, MainActivity.REQ_CODE, 
-    			new Intent(ctx, AlarmReceiver.class), 
+		if(PendingIntent.getBroadcast(ctx, ActMain.REQ_CODE, 
+    			new Intent(ctx, SerAlarmReceiver.class), 
     			PendingIntent.FLAG_NO_CREATE) != null){
 			return true;
 		}else{
@@ -60,8 +60,8 @@ public class AlarmConfigurator {
 	
 	protected boolean cancelAlarm(){
 
-    	PendingIntent.getBroadcast(ctx, MainActivity.REQ_CODE, 
-    			new Intent(ctx, AlarmReceiver.class), 
+    	PendingIntent.getBroadcast(ctx, ActMain.REQ_CODE, 
+    			new Intent(ctx, SerAlarmReceiver.class), 
     			PendingIntent.FLAG_NO_CREATE).cancel();
     	
     	return false;

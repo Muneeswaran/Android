@@ -47,12 +47,6 @@ public class MainActivity extends Activity {
 			in = new Intent(this, Biljeske.class);
 			startActivity(in);
 			break;
-			/*
-		case R.id.bDriveTest:
-			in = new Intent(this, DriveTest.class);
-			startActivity(in);
-			break;
-			*/
 		}
 	}
 

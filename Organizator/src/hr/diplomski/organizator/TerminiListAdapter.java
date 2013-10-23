@@ -3,6 +3,7 @@ package hr.diplomski.organizator;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -13,9 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.graphics.Color;
 
-//import android.content.res.Resources;
-//import android.opengl.Visibility;
-//import android.text.Layout;
 
 public class TerminiListAdapter extends BaseAdapter{
 	
@@ -51,6 +49,7 @@ public class TerminiListAdapter extends BaseAdapter{
 		return position;
 	}
 
+	@SuppressLint("SimpleDateFormat")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View v = convertView;
@@ -105,28 +104,15 @@ public class TerminiListAdapter extends BaseAdapter{
 					seperator.setText(danas);
 				}
 			}
-			
-			/*
-			if(novo || (!noviDatum.equals(prethodniDatum))){
-				novo = false;
-				seperator.setText(noviDatum);
-				prethodniDatum = noviDatum;
-			}else {
-				seperator.setVisibility(View.GONE);
-			}
-			*/
 			pozadina.setBackgroundColor(termin.getBoja());
 			
 			try{
 				LinearLayout alarmi = (LinearLayout) v.findViewById(R.id.llRedakEventAlarm);
 				String alarm = termin.getNaslov();
-				char ch = alarm.charAt(0);
-				//alarm = Character.toString(ch);
+				//char ch = alarm.charAt(0);
 				if(alarm.startsWith("!")){
 					alarmi.setBackgroundColor(Color.RED);
-				}//else{
-					//alarmi.setBackgroundColor(Color.WHITE);
-				//}
+				}
 			}catch(Exception e){
 				
 			}

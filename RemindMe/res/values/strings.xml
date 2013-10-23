@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">RemindMe</string>
+    <string name="action_settings">Settings</string>
+    <string name="welcome">Welcome to RemindMe</string>
+    <string name="find_file">Find file</string>
+    <string name="pick_file">Pick file</string>
+    <string name="import_list">Import list</string>
+    <string name="title_activity_find_files">Find files</string>
+    <string name="searching_files">Searching files...</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="set_title">Set title</string>
+    <string name="cancel">Cancel</string>
+    <string name="error_no_title_set">Error! No title set.</string>
+    <string name="title_already_exists">Title already exists! Try again.</string>
+    <string name="problem_with_file">Problem with selected file! Try again.</string>
+    <string name="list">List</string>
+    <string name="saved">saved</string>
+    <string name="file_not_saved">File not saved! Try another.</string>
+    <string name="title_activity_list_details">List details</string>
+    <string name="add_note">Add note</string>
+    <string name="start">Start</string>
+    <string name="edit">Edit</string>
+    <string name="select...">Select...</string>
+    <string name="delete">Delete</string>
+
+</resources>

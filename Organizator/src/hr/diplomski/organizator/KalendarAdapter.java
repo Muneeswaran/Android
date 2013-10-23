@@ -9,11 +9,7 @@ import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
 
-//import android.widget.LinearLayout;
-//import android.webkit.WebView.FindListener;
 
-// Ovdje našao
-// http://stackoverflow.com/questions/5300787/how-do-i-create-a-custom-cursor-adapter-for-a-listview-for-use-with-images-and-t
 public class KalendarAdapter extends CursorAdapter{
 
     private LayoutInflater mLayoutInflater;
@@ -42,16 +38,11 @@ public class KalendarAdapter extends CursorAdapter{
 	    public TextView trajanje;
 	}
 	
-	// Bolje koristiti ViewHolder umjesto stalno pozivati findViewBy
-	// Bolje spremiti indexe nego pozivati c.getColumnIndex....
-	// LayoutInflater spremiti, a ne stalno pozivati
-	// http://stackoverflow.com/questions/13631075/listview-with-cursoradapter
 	@Override
 	public void bindView(View view, Context context, Cursor cur) {
 			Log.e("bindView", "if");
 			String naslov = cur.getString(cur.getColumnIndex(BiljeskeDbAdapter.KEY_TITLE));
 			String pocetak = cur.getString(cur.getColumnIndex(BiljeskeDbAdapter.KEY_DATE));
-			
 			TextView tvNaslov = (TextView) v.findViewById(R.id.tvEventNaslov);
 			tvNaslov.setText(naslov);
 			

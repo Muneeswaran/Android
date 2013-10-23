@@ -7,77 +7,50 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.support.v4.app.NavUtils;
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.os.Build;
 
-public class BucketList extends Activity{
+public class ActBucketList extends Activity{
 
 	private static int FILE_PICKING_CODE = 959000;
-	TextView tekst;
 	ListView list;
-	AddDataToDb db;
+	SQLAddDataToDb db;
 	Cursor cursor;
-	String retrievedText = "";
-
-	public String getRetrievedText() {
-		return retrievedText;
-	}
-
-
-	public void setRetrievedText(String retrievedText) {
-		this.retrievedText = retrievedText;
-	}
-
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.bucket_list);
 		// Show the Up button in the action bar.
-		setupActionBar();
+		//setupActionBar();
 
-		//tekst = (TextView)findViewById(R.id.tvBucketText);
 		list = (ListView)findViewById(R.id.lvBucketList);
 
 		initArray();
-
-		/*
-		Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-	    intent.setType("file/*");
-	    startActivityForResult(intent, 0);
-		 */
 	}
-
-
+	
+	// For initialization purpose
 	private void initArray() {
-		db = new AddDataToDb(this);
+		db = new SQLAddDataToDb(this);
 		db.open();
 		fillArray();
 	}
-
 
 	private void fillArray() {
 		cursor = db.getBucketList();
 		ArrayList<String> buckets = new ArrayList<String>();
 		if(cursor.moveToFirst()){
-			int index = cursor.getColumnIndex(MyDbHelperClass.COLUMN_QUOTE);
+			int index = cursor.getColumnIndex(SQLMyDbHelperClass.COLUMN_QUOTE);
 			do{
 				buckets.add(cursor.getString(index));
 
@@ -85,45 +58,51 @@ public class BucketList extends Activity{
 		}
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.file_picking_row, buckets);
 		list.setAdapter(adapter);
-
 	}
 
-
+	// Rad sa tipkama
 	public void klik(View v) {
 		switch (v.getId()) {
 		case R.id.bBucketAdd:
 
 			break;
 		case R.id.bBucketImport:
-			startActivityForResult(new Intent(this, FilePicking.class), FILE_PICKING_CODE);
+			startActivityForResult(new Intent(this, ActFilePicking.class), FILE_PICKING_CODE);
 			break;
 		}
-
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
 		if(requestCode == FILE_PICKING_CODE && resultCode == Activity.RESULT_OK){
-			//tekst.setText(data.getExtras().getString("file"));
-			//fileToString(data.getExtras().getString("file"));
-			//tekst.setText(fileToString(data.getExtras().getString("file")));
-			//String retrievedText = fileToString(data.getExtras().getString("file"));
 			new FileToString(this).execute(new String[]{data.getExtras().getString("file")});
-			Log.i("OVDJE", "tu je");
+			//Log.i("OVDJE", "tu je");
 		}
 	}
 
 	public void saveDataToSQL(String result){
-
 		if(result.contains("\n")){
 			db.open();
 			db.addBucketList(result);
 			fillArray();
-			retrievedText = "";
+			//retrievedText = "";
 		}
 	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		db.close();
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		db.open();
+	}
+
+	/*	
 	private String fileToString(String path) {
 		String storageState = Environment.getExternalStorageState();
 		try {
@@ -153,27 +132,11 @@ public class BucketList extends Activity{
 		return "";
 	}
 
-
-
-	@Override
-	protected void onPause() {
-		// TODO Auto-generated method stub
-		super.onPause();
-		db.close();
-	}
-
-	@Override
-	protected void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-		db.open();
-	}
-
-
+	 */
 	/**
 	 * Set up the {@link android.app.ActionBar}, if the API is available.
 	 */
-
+	/*
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	private void setupActionBar() {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
@@ -204,12 +167,12 @@ public class BucketList extends Activity{
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
+	 */
 	public class FileToString extends AsyncTask<String, Void, String>{
 
 		private ProgressDialog dialog;
 		private Context ctx;
-		
+
 		public FileToString(Context context){
 			ctx = context;
 			dialog = new ProgressDialog(ctx);
@@ -238,25 +201,17 @@ public class BucketList extends Activity{
 						stringBuffer2.append(inputString2 + "\n");
 					}
 					inputReader.close();
-					//Log.i("aaaa", stringBuffer2.toString());
 					response = stringBuffer2.toString();
-					
-					
 					if(response.contains("\n")){
 						db.open();
 						db.addBucketList(response);
-						retrievedText = "";
+						//retrievedText = "";
 					}
-					
-					
 					return response;
-					//lblTextViewOne.setText(stringBuffer2.toString());
 				}
 			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			return response;
@@ -264,9 +219,7 @@ public class BucketList extends Activity{
 
 		@Override
 		protected void onPostExecute(String result) {
-			// TODO Auto-generated method stub
 			//super.onPostExecute(result);
-			//Log.i("POST", result);
 			if (dialog.isShowing()) {
 				fillArray();
 				dialog.dismiss();

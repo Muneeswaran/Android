@@ -13,10 +13,6 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Build;
 
-/*import android.widget.ArrayAdapter;
-import android.widget.TextView;
-import android.util.Log;
-import java.util.ArrayList;*/
 
 public class Kontakti extends Activity {
 	
@@ -27,7 +23,6 @@ public class Kontakti extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_kontakti);
-		// Show the Up button in the action bar.
 		setupActionBar();
 		
 		profil = getSharedPreferences("hr.diplomski.organizator.PROFIL", 0);
@@ -70,20 +65,12 @@ public class Kontakti extends Activity {
 				}
 			}
 			textMail += "\n" + profil.getString("poruka", "") + "\n";
-			
-			
-			/*String textMail = profil.getString("poruka", "") + "\n" + "Ime i prezime: " + profil.getString("ime", "") + " " + profil.getString("prezime", "") + "\n" +
-					"Broj mobitela: " + profil.getString("broj", "") + "\n" + "E-mail: " + profil.getString("email", "") + "\n" +
-					"Twitter: " + profil.getString("twitter", "");*/
 
 			Intent in = new Intent(Intent.ACTION_SEND);
 			in.setType("plain/text");
 			in.putExtra(Intent.EXTRA_EMAIL  , new String[]{""});
 			in.putExtra(Intent.EXTRA_SUBJECT, "Moji kontakt podatci");
 			in.putExtra(Intent.EXTRA_TEXT   , textMail);
-			//novi kod za slanje; createChooser koristan jer æe otvoriti izbornik za naèin slanja (mail, poruka, bluetooth), èak iako veæ postoji default
-			//možda ovdje kod slanja maila koristiti stari naèin
-			//startActivity(i);
 			startActivity(Intent.createChooser(in, "Pošalji kontakt..."));
 			break;
 		case R.id.bKontaktiPregled:
@@ -105,7 +92,6 @@ public class Kontakti extends Activity {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.kontakti, menu);
 		return true;
 	}

@@ -4,13 +4,9 @@ import java.io.File;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
-
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.FileFilterUtils;
-import org.apache.commons.io.filefilter.NameFileFilter;
-import org.apache.commons.io.filefilter.SuffixFileFilter;
 import org.apache.commons.io.filefilter.TrueFileFilter;
 
 import android.os.AsyncTask;
@@ -18,7 +14,7 @@ import android.util.Log;
 
 // Koristit æe commons-io
 // Treba vratiti listu fileova za ArrayAdapter ili Mapu (da ima i path i ime)
-public class CommonsFileList extends AsyncTask<String, Void, Map<String, String>>{
+public class ClaCommonsFileList extends AsyncTask<String, Void, Map<String, String>>{
 	/*
 	public CommonsFileList(){
 		

@@ -21,9 +21,6 @@ import android.provider.CalendarContract;
 import android.provider.CalendarContract.Events;
 import android.database.Cursor;
 
-/*import java.net.URI;
-import android.content.res.ColorStateList;
-import android.graphics.Color;*/
 
 public class TerminPregled extends Activity {
 	
@@ -66,10 +63,8 @@ public class TerminPregled extends Activity {
 			uriEvent = Uri.parse("content://com.android.calendar/events");
 		}else {
 			uriCalendar = CalendarContract.Calendars.CONTENT_URI;
-			//uriEvent = CalendarContract.Events.CONTENT_URI;
 			uriEvent = Events.CONTENT_URI;
 		}
-		//android.os.Build.VERSION_CODES.GINGERBREAD
 		
 	}
 
@@ -93,13 +88,9 @@ public class TerminPregled extends Activity {
 
 	private void podesiNaslov() {
 		naslov.setText(extra.getString("Naslov"));
-		//naslov.setLinksClickable(true);
-		//naslov.setLinkTextColor(Color.BLACK);
 
 		long pocetak = extra.getLong("Poèetak");
 		long kraj = extra.getLong("kraj");
-		//sati.setText(new SimpleDateFormat("HH:mm").format(vrijeme));
-		//datum.setText(new SimpleDateFormat("dd.MM.yyyy").format(vrijeme));
 		
 		if(extra.getString("cijeli_dan").equals("1")){
 			sati.setText(R.string.cijeli_dan);
@@ -115,7 +106,6 @@ public class TerminPregled extends Activity {
 			}
 		}
 		
-		// Mora staviti try
 		try {
 			if(extra.getString("mjesto").equals("")){
 				mjesto.setVisibility(View.GONE);
@@ -136,20 +126,12 @@ public class TerminPregled extends Activity {
 			kursor.moveToFirst();
 			kalendar.setBackgroundColor(extra.getInt("boja"));
 			kalendar.setText(kursor.getString(kursor.getColumnIndex("name")));
-			//sadrzaj.setText("ID: " + extra.getString("ID") + "  Event ID: " + extra.getString("event_id"));
 			sadrzaj.setText(extra.getString("sadržaj"));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
-
-
-
-
-
-
 
 	/**
 	 * Set up the {@link android.app.ActionBar}, if the API is available.
@@ -268,21 +250,6 @@ public class TerminPregled extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-	// Ovo radi nešto sporije; možda napraviti startActivityForResult() pa da Query napravi samo kada se nešto obriše
-	/*
-	@Override
-	public void onBackPressed() {
-		popisTermina();
-		finish();
-	}
-	*/
-	/*
-	private void popisTermina(){
-		Intent i = new Intent (this, Termini.class);
-		startActivity(i);
-		finish();
-	}
-	*/
 	private void urediTermin() {
 		Intent i = new Intent(this, NoviTermin.class);
 		i.putExtras(extra);

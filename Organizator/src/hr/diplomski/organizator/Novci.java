@@ -17,6 +17,8 @@ import android.database.Cursor;
 import android.os.Build;
 import android.provider.CalendarContract;
 
+// Ideja za proširenje aplikacije
+// Pregled troškova; nije implementirano
 public class Novci extends Activity {
 	
 	ListView listaNovca;

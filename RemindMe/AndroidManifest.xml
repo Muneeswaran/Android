@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="hr.zbc.remindme"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="17" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:theme="@style/AppTheme" >
+
+        <!-- android:label="@string/app_name" -->
+        <activity
+            android:name="hr.zbc.remindme.ActMainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="hr.zbc.remindme.ActPickFiles"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:label="@string/title_activity_find_files"
+            android:parentActivityName="hr.zbc.remindme.ActMainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="hr.zbc.remindme.MainActivity" />
+        </activity>
+        <activity
+            android:name="hr.zbc.remindme.ActListDetails"
+            android:label="@string/title_activity_list_details"
+            android:parentActivityName="hr.zbc.remindme.ActMainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="hr.zbc.remindme.MainActivity" />
+        </activity>
+    </application>
+
+</manifest>
