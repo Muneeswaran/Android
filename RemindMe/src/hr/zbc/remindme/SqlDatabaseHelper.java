@@ -25,15 +25,30 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper{
 	public static final String KEY_ID = "id";
 	public static final String KEY_TEXT = "text";
 	public static final String KEY_DATE_INSERTED = "date";
-	private static final String KEY_WAS_USED = "used";
+	public static final String KEY_WAS_USED = "used";
 	
 	public static final String KEY_LIST_NAME = "list_name";
+	public static final String KEY_START_TIME = "start_time";
+	public static final String KEY_END_TIME = "end_time";
+	public static final String KEY_TIMES_OF_REPETITION = "times_of_repetition";
+	public static final String KEY_DAILY_OR_WEEKLY = "daily_or_weekly";
+	
+	// Should the message appear every day or a few times a week
+	public static final int DAILY = 0;
+	public static final int WEEKLY = 1;
+	// How many messages do you want to get daily or weekly
+	public static final int DEFAULT_TIMES_OF_REPETITION = 1;
+	// At which time of the day should the messages appear
+	public static final int DEFAULT_START_TIME = 8;
+	public static final int DEFAULT_END_TIME = 22;
 	
 	private static final String CREATE_TABLE_OF_QUOTES = "create  table " + TABLE_OF_QUOTES + " (" + KEY_ID + " integer primary key autoincrement, "
 			+ KEY_TEXT + " text not null, " + KEY_LIST_NAME + " text not null, " + KEY_WAS_USED + " integer default 0)"; 
 	
 	private static final String CREATE_TABLE_OF_LISTS = "create table " + TABLE_OF_LISTS + " (" + KEY_ID + " integer primary key autoincrement, "
-			+ KEY_LIST_NAME + " text not null)";
+			+ KEY_LIST_NAME + " text not null, " + KEY_DAILY_OR_WEEKLY + " integer default " + DAILY + ", " + KEY_TIMES_OF_REPETITION + " integer default " 
+			+ DEFAULT_TIMES_OF_REPETITION + ", " + KEY_START_TIME + " integer default " + DEFAULT_START_TIME + ", " + KEY_END_TIME + " integer default " 
+			+ DEFAULT_END_TIME + ")";
 
 	public SqlDatabaseHelper(Context context, String table_name) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);

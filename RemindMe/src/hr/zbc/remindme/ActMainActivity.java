@@ -71,10 +71,7 @@ public class ActMainActivity extends Activity implements OnItemClickListener, On
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		Log.d("MAIN ACTIVITY", data.getExtras().getBoolean("list_added") + "");
-		Log.i("MAIN ACTIVITY", "ReqCode: " + Integer.toString(requestCode));
 		if((resultCode == RESULT_OK) && (data.getExtras().getBoolean("list_added"))){
-			Log.i("MAIN ACTIVITY", "ReqCode: " + Integer.toString(requestCode));
 			if(requestCode == CODE_PICK){
 				getTitleList();
 			}else if (requestCode == CODE_FIND) {
@@ -120,6 +117,14 @@ public class ActMainActivity extends Activity implements OnItemClickListener, On
 		// This probably gets the id from menu (if you add this elements through an xml layout)
 		// item.getItemId();
 		if (item.getTitle().equals(getResources().getString(R.string.start))){
+			AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+			cur.moveToPosition(info.position);
+			ClaAlarmScheduler scheduler = new ClaAlarmScheduler(this, new DaoAlarmDetails(cur.getLong(cur.getColumnIndex(SqlDatabaseHelper.KEY_ID)),
+					cur.getString(cur.getColumnIndex(SqlDatabaseHelper.KEY_LIST_NAME)), cur.getInt(cur.getColumnIndex(SqlDatabaseHelper.KEY_ID)), 
+					cur.getInt(cur.getColumnIndex(SqlDatabaseHelper.KEY_START_TIME)), 
+					cur.getInt(cur.getColumnIndex(SqlDatabaseHelper.KEY_END_TIME)), cur.getInt(cur.getColumnIndex(SqlDatabaseHelper.KEY_TIMES_OF_REPETITION)), 
+					cur.getInt(cur.getInt(cur.getColumnIndex(SqlDatabaseHelper.KEY_DAILY_OR_WEEKLY)))));
+			scheduler.startAlarm();
 			
 		}else if (item.getTitle().equals(getResources().getString(R.string.cancel))) {
 			
@@ -144,7 +149,6 @@ public class ActMainActivity extends Activity implements OnItemClickListener, On
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
-		Log.d("MAIN ACTIVITY", titles.get(position));
 		startActivity(new Intent(this, ActListDetails.class).putExtra("title", titles.get(position)));
 		
 	}

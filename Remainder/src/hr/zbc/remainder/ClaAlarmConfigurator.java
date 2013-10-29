@@ -31,7 +31,6 @@ public class ClaAlarmConfigurator {
 		
 		cal.set(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), r.nextInt(14)+8, r.nextInt(59));
 		
-		Log.i("VRIJEME", new SimpleDateFormat("dd.MM.yyyy HH:mm").format(cal.getTime()));
 		
 		long time = cal.getTimeInMillis();
 		
