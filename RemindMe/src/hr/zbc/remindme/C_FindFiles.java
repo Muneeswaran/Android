@@ -14,11 +14,11 @@ import java.util.Map;
 import android.content.Context;
 import android.os.Environment;
 
-public class ClaFindFiles {
+public class C_FindFiles {
 
 	Context context;
 
-	public ClaFindFiles(Context contex){
+	public C_FindFiles(Context contex){
 		this.context = contex;
 	}
 

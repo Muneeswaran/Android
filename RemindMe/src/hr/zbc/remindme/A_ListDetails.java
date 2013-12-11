@@ -19,7 +19,7 @@ import android.annotation.TargetApi;
 import android.database.Cursor;
 import android.os.Build;
 
-public class ActListDetails extends Activity implements OnItemClickListener{
+public class A_ListDetails extends Activity implements OnItemClickListener{
 
 	SqlDatabaseHelper db = new SqlDatabaseHelper(this);
 	ListView lv;

@@ -18,10 +18,12 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class ActMainActivity extends Activity implements OnItemClickListener, OnCreateContextMenuListener{
+public class A_MainActivity extends Activity implements OnItemClickListener, OnCreateContextMenuListener{
 	
-	public static int CODE_PICK = 1024;
-	public static int CODE_FIND = 1023;
+	public static final int CODE_PICK = 1024;
+	public static final int CODE_FIND = 1023;
+	public static final int SETTINGS_MENU = 1025;
+	
 	ArrayList<String> titles;
 	Cursor cur;
 	SqlDatabaseHelper db;
@@ -67,16 +69,28 @@ public class ActMainActivity extends Activity implements OnItemClickListener, On
 		
 	}
 	
-	// After the list was imported
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		if((resultCode == RESULT_OK) && (data.getExtras().getBoolean("list_added"))){
-			if(requestCode == CODE_PICK){
-				getTitleList();
-			}else if (requestCode == CODE_FIND) {
-				getTitleList();
+		if (resultCode == RESULT_OK) {
+			// If returned from file picking
+			if (data.getExtras().getBoolean("list_added")) {
+				if (requestCode == CODE_PICK) {
+					getTitleList();
+				} else if (requestCode == CODE_FIND) {
+					getTitleList();
+				}
+			} 
+			// If returned from setting the alarm
+			if(requestCode == SETTINGS_MENU){
+				Log.d("SETTINGS", "" + data.getExtras().getInt("number_of_reminders") + 
+						" BEGIN: " + data.getExtras().getInt("begin") + " end: " + data.getExtras().getInt("end"));
+				
+				data.getExtras().getInt("number_of_reminders");
+				data.getExtras().getInt("begin");
+				data.getExtras().getInt("end");
 			}
+			
 		}
 	}
 	
@@ -84,10 +98,11 @@ public class ActMainActivity extends Activity implements OnItemClickListener, On
 	public void importClick(View v){
 		switch (v.getId()) {
 		case R.id.bMainPick:
-			startActivityForResult(new Intent(this, ActPickFiles.class).putExtra("request_code", CODE_PICK), CODE_PICK);
+			startActivityForResult(new Intent(this, A_PickFiles.class).putExtra("request_code", CODE_PICK), CODE_PICK);
 			break;
 		case R.id.bMainFind:
-			startActivityForResult(new Intent(this, ActPickFiles.class).putExtra("request_code", CODE_FIND), CODE_FIND);
+			startActivityForResult(new Intent(this, A_PickFiles.class).putExtra("request_code", CODE_FIND), CODE_FIND);
+			//new C_DailyAlarm(this, new DaoAlarmDetails(2, "Naslov", 102, 12, 13, 3, 0)).startAlarm();
 			break;
 		}
 	}
@@ -117,15 +132,18 @@ public class ActMainActivity extends Activity implements OnItemClickListener, On
 		// This probably gets the id from menu (if you add this elements through an xml layout)
 		// item.getItemId();
 		if (item.getTitle().equals(getResources().getString(R.string.start))){
+			/*
 			AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
 			cur.moveToPosition(info.position);
-			ClaAlarmScheduler scheduler = new ClaAlarmScheduler(this, new DaoAlarmDetails(cur.getLong(cur.getColumnIndex(SqlDatabaseHelper.KEY_ID)),
+			
+			C_DailyAlarm scheduler = new C_DailyAlarm(this, new DaoAlarmDetails(cur.getLong(cur.getColumnIndex(SqlDatabaseHelper.KEY_ID)),
 					cur.getString(cur.getColumnIndex(SqlDatabaseHelper.KEY_LIST_NAME)), cur.getInt(cur.getColumnIndex(SqlDatabaseHelper.KEY_ID)), 
 					cur.getInt(cur.getColumnIndex(SqlDatabaseHelper.KEY_START_TIME)), 
 					cur.getInt(cur.getColumnIndex(SqlDatabaseHelper.KEY_END_TIME)), cur.getInt(cur.getColumnIndex(SqlDatabaseHelper.KEY_TIMES_OF_REPETITION)), 
 					cur.getInt(cur.getInt(cur.getColumnIndex(SqlDatabaseHelper.KEY_DAILY_OR_WEEKLY)))));
 			scheduler.startAlarm();
-			
+			*/
+			startActivityForResult(new Intent(this, A_SettingsDailyAlarm.class), SETTINGS_MENU);
 		}else if (item.getTitle().equals(getResources().getString(R.string.cancel))) {
 			
 		}else if (item.getTitle().equals(getResources().getString(R.string.edit))) {
@@ -149,7 +167,7 @@ public class ActMainActivity extends Activity implements OnItemClickListener, On
 
 	@Override
 	public void onItemClick(AdapterView<?> arg0, View v, int position, long id) {
-		startActivity(new Intent(this, ActListDetails.class).putExtra("title", titles.get(position)));
+		startActivity(new Intent(this, A_ListDetails.class).putExtra("title", titles.get(position)));
 		
 	}
 

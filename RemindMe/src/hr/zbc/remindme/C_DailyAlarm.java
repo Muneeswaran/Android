@@ -1,6 +1,5 @@
 package hr.zbc.remindme;
 
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Random;
@@ -10,11 +9,12 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
 
-public class ClaAlarmScheduler {
+public class C_DailyAlarm implements I_AlarmSchedule{
 	
-	private static String PREFERENCES = "hr.zbc.remindme.SHARED_PREFS";
+	private final String PREFERENCES = "hr.zbc.remindme.SHARED_PREFS";
 	
 	SharedPreferences sharedPrefs;
 	SharedPreferences.Editor editor;
@@ -22,34 +22,39 @@ public class ClaAlarmScheduler {
 	Context ctx;
 	DaoAlarmDetails alarmDetails;
 	
-	public ClaAlarmScheduler(Context context, DaoAlarmDetails alarmDetails){
+	public C_DailyAlarm(Context context, DaoAlarmDetails alarmDetails){
 		this.ctx = context;
 		this.alarmDetails = alarmDetails;
 	}
 
 	public void startAlarm() {
-		if(checkIfAlarmIsStarted()){
+		if(!checkIfAlarmIsStarted()){
 			
 			long timeOfNextAlarm = getTimeOfNextAlarm();
-			
-			Intent intentAlarm = new Intent(ctx, RecAlarmReceiver.class);
-			AlarmManager alarmManager = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
-
-			alarmManager.set(AlarmManager.RTC_WAKEUP,timeOfNextAlarm, PendingIntent.getBroadcast(ctx,(int) alarmDetails.getId(), 
-					intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
-			
+			setTheAlarm(timeOfNextAlarm);
 			addOneToCounter();
-
+			
+			//Toast.makeText(ctx, new SimpleDateFormat("dd.MM.yyyy HH:mm").format(timeOfNextAlarm),Toast.LENGTH_SHORT).show();
 			//return new SimpleDateFormat("dd.MM.yyyy HH:mm").format(cal.getTime());
 		}else{
 			
 			// return "Alarm already set!";
 		}
 	}
+
+	private void setTheAlarm(long timeOfNextAlarm) {
+		Intent intentAlarm = new Intent(ctx, RecAlarmReceiver.class);
+		AlarmManager alarmManager = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
+		alarmManager.set(AlarmManager.RTC_WAKEUP,timeOfNextAlarm, PendingIntent.getBroadcast(ctx,(int) alarmDetails.getId(), 
+				intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
+	}
 	
 	private void addOneToCounter() {
 		editor = sharedPrefs.edit();
-		int maxRepetitions = alarmDetails.getHowManyRepetitions();
+		// maxRepetitions => how many alarms per day are supposed to happen. 
+		// If the max amount is reached then the counter will be set to 0
+		// and the next alarm will be set for tomorrow.s
+		int maxRepetitions = alarmDetails.getNumberOfPlannedRepetitions();
 		int currentRepetition = sharedPrefs.getInt(alarmDetails.getTitle() + "_OCCURED_REPETITIONS", 0);
 		
 		if((maxRepetitions-1) > currentRepetition){
@@ -68,7 +73,7 @@ public class ClaAlarmScheduler {
 		int numberOfOccuredRepetition = getNumberOfOccuredRepetitions();
 		
 		// Defined by user, how many messages per day does he want
-		int numberOfPlannedRepetitions = alarmDetails.getHowManyRepetitions();
+		int numberOfPlannedRepetitions = alarmDetails.getNumberOfPlannedRepetitions();
 		
 		// Interval chosen by user, defines when an alarm can occur
 		int startTime = alarmDetails.getStartTime();
@@ -77,6 +82,7 @@ public class ClaAlarmScheduler {
 		int periodBetweenStartAndEnd = endTime - startTime;
 		int minutesBetweenEachAlarm = (periodBetweenStartAndEnd * 60)/numberOfPlannedRepetitions;
 		
+		// If the number of occured repetitions is set to 0, then the next alarm will tomorrow. Otherwise this function will return today's date
 		Calendar calendar = getCorrectDateForAlarm(numberOfOccuredRepetition);
 		int randomMinutesToAddToStartTime = getRandomMinutesToAddToStartTime(startTime, numberOfPlannedRepetitions, numberOfOccuredRepetition, minutesBetweenEachAlarm);
 		int hoursToAddToStart = randomMinutesToAddToStartTime/60;

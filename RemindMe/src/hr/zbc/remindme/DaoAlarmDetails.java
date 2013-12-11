@@ -56,7 +56,7 @@ public class DaoAlarmDetails {
 		this.endTime = endTime;
 	}
 
-	public int getHowManyRepetitions() {
+	public int getNumberOfPlannedRepetitions() {
 		return howManyRepetitions;
 	}
 

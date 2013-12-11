@@ -43,7 +43,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.provider.MediaStore;
 
-public class ActPickFiles extends Activity implements OnItemClickListener{
+public class A_PickFiles extends Activity implements OnItemClickListener{
 	
 	//CursorLoader cursor;
 	//List<File> fileList;
@@ -52,7 +52,7 @@ public class ActPickFiles extends Activity implements OnItemClickListener{
 	List<String> fileName, filePath;
 	ListView fileListView;
 	int reqCode;
-	ClaFindFiles findClass = new ClaFindFiles(this);
+	C_FindFiles findClass = new C_FindFiles(this);
 	boolean firstLoad = true, listAdded = false, fileSaved = false;
 	AsyncTaskRunner runner;
 	SqlDatabaseHelper  db;
@@ -74,13 +74,13 @@ public class ActPickFiles extends Activity implements OnItemClickListener{
 		//int reqCode = savedInstanceState.getInt("request_code");
 		reqCode = getIntent().getExtras().getInt("request_code");
 		
-		if (reqCode == ActMainActivity.CODE_PICK) {
+		if (reqCode == A_MainActivity.CODE_PICK) {
 			if (Environment.getExternalStorageState().equals(
 					Environment.MEDIA_MOUNTED)) {
 				AsyncTaskRunner runner = new AsyncTaskRunner();
 				runner.execute(Environment.getExternalStorageDirectory());
 			}
-		} else if (reqCode == ActMainActivity.CODE_FIND) {
+		} else if (reqCode == A_MainActivity.CODE_FIND) {
 			listDirectories(Environment.getExternalStorageDirectory()
 					.getPath());
 		}
@@ -154,7 +154,7 @@ public class ActPickFiles extends Activity implements OnItemClickListener{
 					//finish();
 					title = input.getText().toString();
 					if(title.equals("")){
-						Toast.makeText(ActPickFiles.this, R.string.error_no_title_set, Toast.LENGTH_LONG).show();
+						Toast.makeText(A_PickFiles.this, R.string.error_no_title_set, Toast.LENGTH_LONG).show();
 					}else {
 						saveQuotes(title, file);
 					}
@@ -174,21 +174,21 @@ public class ActPickFiles extends Activity implements OnItemClickListener{
 		//-------------------------------
 		if(titles.size()>0){
 			if (titles.contains(str)) {
-				Toast.makeText(ActPickFiles.this, R.string.title_already_exists,
+				Toast.makeText(A_PickFiles.this, R.string.title_already_exists,
 						Toast.LENGTH_LONG).show();
 			}else{
 				Log.i("PICK FILES", "Inside else");
 				if(f.exists() && f.canRead()){
 					new FileToString().execute(f);
 				}else{
-					Toast.makeText(ActPickFiles.this, R.string.problem_with_file, Toast.LENGTH_LONG).show();
+					Toast.makeText(A_PickFiles.this, R.string.problem_with_file, Toast.LENGTH_LONG).show();
 				}
 			}
 		}else{
 			if(f.exists() && f.canRead()){
 				new FileToString().execute(f);
 			}else{
-				Toast.makeText(ActPickFiles.this, R.string.problem_with_file, Toast.LENGTH_LONG).show();
+				Toast.makeText(A_PickFiles.this, R.string.problem_with_file, Toast.LENGTH_LONG).show();
 			}
 		}
 	}
@@ -197,7 +197,7 @@ public class ActPickFiles extends Activity implements OnItemClickListener{
 			fileSaved = false;
 			db.addTitle(title);
 			listAdded = true;
-			Toast.makeText(ActPickFiles.this, getResources().getString(R.string.list) + ": " + title + " "+ getResources().getString(R.string.saved), Toast.LENGTH_LONG).show();
+			Toast.makeText(A_PickFiles.this, getResources().getString(R.string.list) + ": " + title + " "+ getResources().getString(R.string.saved), Toast.LENGTH_LONG).show();
 			title = "";
 			db.close();
 	}
@@ -265,7 +265,7 @@ public class ActPickFiles extends Activity implements OnItemClickListener{
 		protected void onPreExecute() {
 			super.onPreExecute();
 			//pDialog = ProgressDialog.show(PickFiles.this, getResources().getString(R.string.searching_files), "");
-			pDialog = new ProgressDialog(ActPickFiles.this);
+			pDialog = new ProgressDialog(A_PickFiles.this);
 			pDialog.setTitle(getResources().getString(R.string.searching_files));
 			pDialog.setMessage("");
 			//pDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
@@ -391,7 +391,7 @@ public class ActPickFiles extends Activity implements OnItemClickListener{
 				fileSaved = false;
 				saveTitle();
 			}else{
-				Toast.makeText(ActPickFiles.this, R.string.file_not_saved, Toast.LENGTH_LONG).show();
+				Toast.makeText(A_PickFiles.this, R.string.file_not_saved, Toast.LENGTH_LONG).show();
 			}
 		}
 	}

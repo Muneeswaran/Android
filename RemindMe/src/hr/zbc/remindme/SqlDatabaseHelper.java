@@ -40,7 +40,7 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper{
 	public static final int DEFAULT_TIMES_OF_REPETITION = 1;
 	// At which time of the day should the messages appear
 	public static final int DEFAULT_START_TIME = 8;
-	public static final int DEFAULT_END_TIME = 22;
+	public static final int DEFAULT_END_TIME = 20;
 	
 	private static final String CREATE_TABLE_OF_QUOTES = "create  table " + TABLE_OF_QUOTES + " (" + KEY_ID + " integer primary key autoincrement, "
 			+ KEY_TEXT + " text not null, " + KEY_LIST_NAME + " text not null, " + KEY_WAS_USED + " integer default 0)"; 
@@ -202,6 +202,14 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper{
 	public void deleteAllTitles(){
 		//SQLiteDatabase db = this.getWritableDatabase();
 		
+	}
+	
+	public void updateTitle(String title, String repetitions, String begin, String end){
+		ContentValues cv = new ContentValues();
+		cv.put(KEY_TIMES_OF_REPETITION, repetitions);
+		cv.put(KEY_START_TIME, begin);
+		cv.put(KEY_END_TIME, end);
+		db.update(TABLE_OF_LISTS, cv, KEY_LIST_NAME + " =?", new String[]{title});
 	}
 	
 	
