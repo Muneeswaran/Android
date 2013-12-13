@@ -11,9 +11,9 @@ public class C_WeeklyAlarm implements I_AlarmSchedule {
 	SharedPreferences.Editor editor;
 	
 	Context ctx;
-	DaoAlarmDetails alarmDetails;
+	DAO_AlarmDetails alarmDetails;
 	
-	public C_WeeklyAlarm(Context context, DaoAlarmDetails alarmDetails){
+	public C_WeeklyAlarm(Context context, DAO_AlarmDetails alarmDetails){
 		this.alarmDetails = alarmDetails;
 		this.ctx = context;
 	}

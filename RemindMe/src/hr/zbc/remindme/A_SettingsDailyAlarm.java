@@ -3,6 +3,7 @@ package hr.zbc.remindme;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
@@ -11,11 +12,13 @@ import android.widget.Toast;
 public class A_SettingsDailyAlarm extends Activity {
 	
 	TextView numberOfReminders, intervalBegin, intervalEnd;
+	int position;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.a_settings_daily_alarm);
+		this.position = getIntent().getExtras().getInt("position");
 		
 		initializeTextViews();
 	}
@@ -29,7 +32,7 @@ public class A_SettingsDailyAlarm extends Activity {
 
 
 	public void settingsClick(View v){
-		// check if Button or CheckBox clicked
+		// check if Button or CheckBox is clicked
 		if("button".equals(v.getContentDescription())){
 			buttonClicked(v);
 		}else{
@@ -45,53 +48,90 @@ public class A_SettingsDailyAlarm extends Activity {
 		
 		switch (v.getId()) {
 		case R.id.bSettingsNumberOfRemindersMinus:
-			if(reminders > 1){
-				--reminders;
-				numberOfReminders.setText("" + reminders);
-			}
+			numberOfRemindersDecrease(reminders);
 			break;
 		case R.id.bSettingsNumberOfRemindersPlus:
-			if(reminders < 6){
-				++reminders;
-				numberOfReminders.setText("" + reminders);
-			}
+			numberOfRemindersIncrease(reminders);
 			break;
 		case R.id.bSettingsIntervalBeginMinus:
-			if(begin > 0){
-				--begin;
-				intervalBegin.setText("" + begin);
-			}
+			intervalBeginDecrease(begin);
 			break;
 		case R.id.bSettingsIntervalBeginPlus:
-			if((begin+1)<end){
-				++begin;
-				intervalBegin.setText("" + begin);
-			}
+			intervalBeginIncrease(begin, end);
 			break;
 		case R.id.bSettingsIntervalEndMinus:
-			if((end-1) > begin){
-				--end;
-				intervalEnd.setText("" + end);
-			}
+			intervalEndDecrease(begin, end);
 			break;
 		case R.id.bSettingsIntervalEndPlus:
-			if(end <= 23){
-				++end;
-				intervalEnd.setText("" + end);
-			}
+			intervalEndIncrease(end);
 			break;
 		case R.id.bSettingsStartThisList:
-			Intent i = new Intent();
-			i.putExtra("number_of_reminders", reminders);
-			i.putExtra("begin", begin);
-			i.putExtra("end", end);
-			setResult(RESULT_OK, i);
-			finish();
+			sendDataToMainActivity(begin, end, reminders);
 			break;
 		}
 		
 	}
-	
+
+
+	private void numberOfRemindersDecrease(int reminders) {
+		if(reminders > 1){
+			--reminders;
+			numberOfReminders.setText("" + reminders);
+		}
+	}
+
+
+	private void numberOfRemindersIncrease(int reminders) {
+		if(reminders < 6){
+			++reminders;
+			numberOfReminders.setText("" + reminders);
+		}
+	}
+
+
+	private void intervalBeginDecrease(int begin) {
+		if(begin > 0){
+			--begin;
+			intervalBegin.setText("" + begin);
+		}
+	}
+
+
+	private void intervalBeginIncrease(int begin, int end) {
+		if((begin+1)<end){
+			++begin;
+			intervalBegin.setText("" + begin);
+		}
+	}
+
+
+	private void intervalEndDecrease(int begin, int end) {
+		if((end-1) > begin){
+			--end;
+			intervalEnd.setText("" + end);
+		}
+	}
+
+
+	private void intervalEndIncrease(int end) {
+		if(end <= 23){
+			++end;
+			intervalEnd.setText("" + end);
+		}
+	}
+
+
+	private void sendDataToMainActivity(int begin, int end, int reminders) {
+		Intent i = new Intent();
+		i.putExtra("position", position);
+		i.putExtra("number_of_reminders", reminders);
+		i.putExtra("begin", begin);
+		i.putExtra("end", end);
+		setResult(RESULT_OK, i);
+		finish();
+	}
+
+
 	private void checkBoxClicked(View v) {
 		
 	}

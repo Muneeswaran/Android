@@ -2,6 +2,7 @@ package hr.zbc.remindme;
 
 import java.util.ArrayList;
 
+import android.R.integer;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -26,7 +27,7 @@ public class A_MainActivity extends Activity implements OnItemClickListener, OnC
 	
 	ArrayList<String> titles;
 	Cursor cur;
-	SqlDatabaseHelper db;
+	SQL_DatabaseHelper db = new SQL_DatabaseHelper(this);;
 	
 	ListView lv;
 
@@ -45,12 +46,21 @@ public class A_MainActivity extends Activity implements OnItemClickListener, OnC
 	
 	// SQL query (only for titles)
 	private void getTitleList(){
-		db = new SqlDatabaseHelper(this);
+		prepareCursorFromDb();
+		fillArrayAndLoadList();
+		//db.closeCursor();
+		db.close();
+	}
+
+	private void prepareCursorFromDb() {
 		db.open();
 		titles = new ArrayList<String>();
 		cur = db.getAllTitlesCursor();
+	}
+
+	private void fillArrayAndLoadList() {
 		if(cur.getCount() > 0){
-			int index = cur.getColumnIndex(SqlDatabaseHelper.KEY_LIST_NAME);
+			int index = cur.getColumnIndex(SQL_DatabaseHelper.KEY_LIST_NAME);
 			if(cur.moveToFirst()){
 				do{
 					titles.add(cur.getString(index));
@@ -58,10 +68,8 @@ public class A_MainActivity extends Activity implements OnItemClickListener, OnC
 			}
 			loadListView(titles);
 		}
-		db.closeCursor();
-		db.close();
 	}
-	
+
 	// Adding items (list titles) to ListView
 	private void loadListView(ArrayList<String> items){
 		ArrayAdapter<String> mAdapter = new ArrayAdapter<String>(this, R.layout.row_find_files, R.id.tvRowFindFilesNames, items);
@@ -83,17 +91,30 @@ public class A_MainActivity extends Activity implements OnItemClickListener, OnC
 			} 
 			// If returned from setting the alarm
 			if(requestCode == SETTINGS_MENU){
-				Log.d("SETTINGS", "" + data.getExtras().getInt("number_of_reminders") + 
-						" BEGIN: " + data.getExtras().getInt("begin") + " end: " + data.getExtras().getInt("end"));
-				
-				data.getExtras().getInt("number_of_reminders");
-				data.getExtras().getInt("begin");
-				data.getExtras().getInt("end");
+				// Number of reminders, interval beginning and end
+				updateTitleSettings(data.getExtras().getInt("position"), data.getExtras().getInt("number_of_reminders"), data.getExtras().getInt("begin"), data.getExtras().getInt("end"));
 			}
 			
 		}
 	}
 	
+	private void updateTitleSettings(int position, int reminders, int begin, int end) {
+		db.open();
+		db.updateTitle(titles.get(position), reminders, begin, end);
+		db.close();
+		startAlarm(position, reminders, begin, end);
+	}
+
+	private void startAlarm(int position, int reminders, int begin, int end) {
+		Log.i("POSITION", ""+ position);
+		cur.moveToPosition(position);
+		C_DailyAlarm scheduler = new C_DailyAlarm(this, 
+				new DAO_AlarmDetails(cur.getLong(cur.getColumnIndex(SQL_DatabaseHelper.KEY_ID)), 
+						cur.getString(cur.getColumnIndex(SQL_DatabaseHelper.KEY_LIST_NAME)), cur.getInt(cur.getColumnIndex(SQL_DatabaseHelper.KEY_ID)), 
+						reminders, begin, end, cur.getInt(cur.getColumnIndex(SQL_DatabaseHelper.KEY_DAILY_OR_WEEKLY))));
+		scheduler.startAlarm();
+	}
+
 	// Buttons
 	public void importClick(View v){
 		switch (v.getId()) {
@@ -132,18 +153,10 @@ public class A_MainActivity extends Activity implements OnItemClickListener, OnC
 		// This probably gets the id from menu (if you add this elements through an xml layout)
 		// item.getItemId();
 		if (item.getTitle().equals(getResources().getString(R.string.start))){
-			/*
-			AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-			cur.moveToPosition(info.position);
 			
-			C_DailyAlarm scheduler = new C_DailyAlarm(this, new DaoAlarmDetails(cur.getLong(cur.getColumnIndex(SqlDatabaseHelper.KEY_ID)),
-					cur.getString(cur.getColumnIndex(SqlDatabaseHelper.KEY_LIST_NAME)), cur.getInt(cur.getColumnIndex(SqlDatabaseHelper.KEY_ID)), 
-					cur.getInt(cur.getColumnIndex(SqlDatabaseHelper.KEY_START_TIME)), 
-					cur.getInt(cur.getColumnIndex(SqlDatabaseHelper.KEY_END_TIME)), cur.getInt(cur.getColumnIndex(SqlDatabaseHelper.KEY_TIMES_OF_REPETITION)), 
-					cur.getInt(cur.getInt(cur.getColumnIndex(SqlDatabaseHelper.KEY_DAILY_OR_WEEKLY)))));
-			scheduler.startAlarm();
-			*/
-			startActivityForResult(new Intent(this, A_SettingsDailyAlarm.class), SETTINGS_MENU);
+			AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+			startActivityForResult(new Intent(this, A_SettingsDailyAlarm.class).putExtra("position", info.position), SETTINGS_MENU);
+			
 		}else if (item.getTitle().equals(getResources().getString(R.string.cancel))) {
 			
 		}else if (item.getTitle().equals(getResources().getString(R.string.edit))) {

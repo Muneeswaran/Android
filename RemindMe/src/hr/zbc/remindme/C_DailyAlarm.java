@@ -20,9 +20,9 @@ public class C_DailyAlarm implements I_AlarmSchedule{
 	SharedPreferences.Editor editor;
 	
 	Context ctx;
-	DaoAlarmDetails alarmDetails;
+	DAO_AlarmDetails alarmDetails;
 	
-	public C_DailyAlarm(Context context, DaoAlarmDetails alarmDetails){
+	public C_DailyAlarm(Context context, DAO_AlarmDetails alarmDetails){
 		this.ctx = context;
 		this.alarmDetails = alarmDetails;
 	}
@@ -32,7 +32,7 @@ public class C_DailyAlarm implements I_AlarmSchedule{
 			
 			long timeOfNextAlarm = getTimeOfNextAlarm();
 			setTheAlarm(timeOfNextAlarm);
-			addOneToCounter();
+			//addOneToCounter();
 			
 			//Toast.makeText(ctx, new SimpleDateFormat("dd.MM.yyyy HH:mm").format(timeOfNextAlarm),Toast.LENGTH_SHORT).show();
 			//return new SimpleDateFormat("dd.MM.yyyy HH:mm").format(cal.getTime());
@@ -43,10 +43,15 @@ public class C_DailyAlarm implements I_AlarmSchedule{
 	}
 
 	private void setTheAlarm(long timeOfNextAlarm) {
-		Intent intentAlarm = new Intent(ctx, RecAlarmReceiver.class);
+		Intent intentAlarm = new Intent(ctx, REC_AlarmReceiver.class);
+		intentAlarm.putExtra("title", alarmDetails.getTitle());
+		
 		AlarmManager alarmManager = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
-		alarmManager.set(AlarmManager.RTC_WAKEUP,timeOfNextAlarm, PendingIntent.getBroadcast(ctx,(int) alarmDetails.getId(), 
+		//alarmManager.set(AlarmManager.RTC_WAKEUP,timeOfNextAlarm, PendingIntent.getBroadcast(ctx,(int) alarmDetails.getId(), 
+			//	intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
+		alarmManager.set(AlarmManager.RTC_WAKEUP, Calendar.getInstance().getTimeInMillis()+10000, PendingIntent.getBroadcast(ctx,(int) alarmDetails.getId(), 
 				intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
+		
 	}
 	
 	private void addOneToCounter() {

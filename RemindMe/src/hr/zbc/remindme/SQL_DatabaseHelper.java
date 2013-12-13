@@ -12,7 +12,7 @@ import android.database.sqlite.SQLiteStatement;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-public class SqlDatabaseHelper extends SQLiteOpenHelper{
+public class SQL_DatabaseHelper extends SQLiteOpenHelper{
 	
 	SQLiteDatabase db;
 	Cursor cur;
@@ -49,13 +49,13 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper{
 			+ KEY_LIST_NAME + " text not null, " + KEY_DAILY_OR_WEEKLY + " integer default " + DAILY + ", " + KEY_TIMES_OF_REPETITION + " integer default " 
 			+ DEFAULT_TIMES_OF_REPETITION + ", " + KEY_START_TIME + " integer default " + DEFAULT_START_TIME + ", " + KEY_END_TIME + " integer default " 
 			+ DEFAULT_END_TIME + ")";
-
+	/*
 	public SqlDatabaseHelper(Context context, String table_name) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 		//this.TABLE_OF_QUOTES = table_name;
 	}
-	
-	public SqlDatabaseHelper(Context context){
+	*/
+	public SQL_DatabaseHelper(Context context){
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
 	}
 
@@ -79,7 +79,8 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper{
 	}
 	
 	public void close(){
-		db.close();
+		if (db != null && db.isOpen())
+            db.close();
 	}
 	
 	public void closeCursor(){
@@ -151,7 +152,8 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper{
 		
 	}
 	
-	
+	// I'm not sure why this method is still here
+	// In the class MainActivity I am using the method which returns a Cursor
 	public ArrayList<String> getAllTitles(){
 		Log.i("GET ALL TITLES", "Here");
 		//SQLiteDatabase db = this.getWritableDatabase();
@@ -174,8 +176,8 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper{
 	}
 	
 	public Cursor getAllTitlesCursor(){
-		cur = db.query(this.TABLE_OF_LISTS, new String[]{KEY_ID, KEY_LIST_NAME}, null, null, null, null, null);
-		return cur;
+		//cur = db.query(TABLE_OF_LISTS, new String[]{KEY_ID, KEY_LIST_NAME}, null, null, null, null, null);
+		return db.query(TABLE_OF_LISTS, null, null, null, null, null, null);
 	}
 	public void addTitle(String str){
 		//SQLiteDatabase db = this.getWritableDatabase();
@@ -210,6 +212,15 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper{
 		cv.put(KEY_START_TIME, begin);
 		cv.put(KEY_END_TIME, end);
 		db.update(TABLE_OF_LISTS, cv, KEY_LIST_NAME + " =?", new String[]{title});
+	}
+	
+	public void updateTitle(String title, int repetitions, int begin, int end){
+		ContentValues cv = new ContentValues();
+		cv.put(KEY_TIMES_OF_REPETITION, repetitions);
+		cv.put(KEY_START_TIME, begin);
+		cv.put(KEY_END_TIME, end);
+		Log.d("SQL", title + " " + repetitions + " " + begin + end);
+		db.update(TABLE_OF_LISTS, cv, KEY_LIST_NAME + "=?", new String[]{title});
 	}
 	
 	

@@ -1,12 +1,19 @@
 package hr.zbc.remindme;
 
-public class DaoAlarmDetails {
+public class DAO_AlarmDetails {
 	
 	private int reqCode, startTime, endTime, howManyRepetitions, dailyOrWeekly;
 	private long id;
 	private String title;
 	
-	public DaoAlarmDetails(long id, String title, int reqCode, int startTime, int endTime, int howManyRepetitions, int dailyOrWeekly){
+	public DAO_AlarmDetails(String title, int repetitions, int startTime, int endTime){
+		this.title = title;
+		this.howManyRepetitions = repetitions;
+		this.startTime = startTime;
+		this.endTime = endTime;
+	}
+	
+	public DAO_AlarmDetails(long id, String title, int reqCode, int startTime, int endTime, int howManyRepetitions, int dailyOrWeekly){
 		this.id = id;
 		this.title = title;
 		this.reqCode = reqCode;

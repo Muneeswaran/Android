@@ -41,7 +41,7 @@ public class ClaAlarmConfigurator {
         AlarmManager alarmManager = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
 
         //set the alarm for particular time
-        alarmManager.set(AlarmManager.RTC_WAKEUP,time, PendingIntent.getBroadcast(ctx,ActMain.REQ_CODE,  intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
+        alarmManager.set(AlarmManager.RTC_WAKEUP,time, PendingIntent.getBroadcast(ctx, ActMain.REQ_CODE, intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
 		
 		return new SimpleDateFormat("dd.MM.yyyy HH:mm").format(cal.getTime());
 	}

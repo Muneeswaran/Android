@@ -21,7 +21,7 @@ import android.os.Build;
 
 public class A_ListDetails extends Activity implements OnItemClickListener{
 
-	SqlDatabaseHelper db = new SqlDatabaseHelper(this);
+	SQL_DatabaseHelper db = new SQL_DatabaseHelper(this);
 	ListView lv;
 	String title;
 	ArrayList<String> quotes;
@@ -47,10 +47,8 @@ public class A_ListDetails extends Activity implements OnItemClickListener{
 		quotes = new ArrayList<String>();
 		cursor = db.getQuotes(title);
 		int index = cursor.getColumnIndex("text");
-		Log.d("LIST DETAILS", cursor.getCount() + " Index: " + index);
 		if(cursor.moveToFirst()){
 			do{
-				Log.d("LIST DETAILS", cursor.getString(index));
 				quotes.add(cursor.getString(index));
 			}while(cursor.moveToNext());
 		}

@@ -41,7 +41,7 @@
                 android:value="hr.zbc.remindme.MainActivity" />
         </activity>
 
-        <receiver android:name="hr.zbc.remindme.RecAlarmReceiver" />
+        <receiver android:name="hr.zbc.remindme.REC_AlarmReceiver" />
 
         <activity
             android:name="hr.zbc.remindme.A_SettingsDailyAlarm"

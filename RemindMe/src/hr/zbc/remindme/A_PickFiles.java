@@ -55,7 +55,7 @@ public class A_PickFiles extends Activity implements OnItemClickListener{
 	C_FindFiles findClass = new C_FindFiles(this);
 	boolean firstLoad = true, listAdded = false, fileSaved = false;
 	AsyncTaskRunner runner;
-	SqlDatabaseHelper  db;
+	SQL_DatabaseHelper  db;
 	String title = "";
 	
 	
@@ -168,7 +168,7 @@ public class A_PickFiles extends Activity implements OnItemClickListener{
 	private void saveQuotes(String str, File f){
 		ArrayList<String> titles = new ArrayList<String>();
 		//---------------------------
-		db = new SqlDatabaseHelper(this);
+		db = new SQL_DatabaseHelper(this);
 		db.open();
 		titles = db.getAllTitles();
 		//-------------------------------
