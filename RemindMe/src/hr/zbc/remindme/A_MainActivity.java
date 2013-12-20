@@ -134,7 +134,7 @@ public class A_MainActivity extends Activity implements OnItemClickListener, OnC
 		super.onCreateContextMenu(menu, v, menuInfo);
         menu.setHeaderTitle(R.string.select___);  
         menu.add(0, v.getId(), 0, R.string.start);  
-        menu.add(0, v.getId(), 0, R.string.cancel); 
+        menu.add(0, v.getId(), 0, R.string.stop); 
         menu.add(0, v.getId(), 0, R.string.edit); 
         menu.add(0, v.getId(), 0, R.string.delete); 
 	}

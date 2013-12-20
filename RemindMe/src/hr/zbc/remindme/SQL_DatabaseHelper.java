@@ -30,7 +30,8 @@ public class SQL_DatabaseHelper extends SQLiteOpenHelper{
 	public static final String KEY_LIST_NAME = "list_name";
 	public static final String KEY_START_TIME = "start_time";
 	public static final String KEY_END_TIME = "end_time";
-	public static final String KEY_TIMES_OF_REPETITION = "times_of_repetition";
+	public static final String KEY_MAXIMUM_REMINDERS = "maximum_reminders";
+	public static final String KEY_NUMBER_OF_REPETITIONS = "number_of_repetitions";
 	public static final String KEY_DAILY_OR_WEEKLY = "daily_or_weekly";
 	
 	// Should the message appear every day or a few times a week
@@ -43,11 +44,11 @@ public class SQL_DatabaseHelper extends SQLiteOpenHelper{
 	public static final int DEFAULT_END_TIME = 20;
 	
 	private static final String CREATE_TABLE_OF_QUOTES = "create  table " + TABLE_OF_QUOTES + " (" + KEY_ID + " integer primary key autoincrement, "
-			+ KEY_TEXT + " text not null, " + KEY_LIST_NAME + " text not null, " + KEY_WAS_USED + " integer default 0)"; 
+			+ KEY_TEXT + " text not null, " + KEY_LIST_NAME + " text not null, " + KEY_WAS_USED + " integer default '0')"; 
 	
 	private static final String CREATE_TABLE_OF_LISTS = "create table " + TABLE_OF_LISTS + " (" + KEY_ID + " integer primary key autoincrement, "
-			+ KEY_LIST_NAME + " text not null, " + KEY_DAILY_OR_WEEKLY + " integer default " + DAILY + ", " + KEY_TIMES_OF_REPETITION + " integer default " 
-			+ DEFAULT_TIMES_OF_REPETITION + ", " + KEY_START_TIME + " integer default " + DEFAULT_START_TIME + ", " + KEY_END_TIME + " integer default " 
+			+ KEY_LIST_NAME + " text not null, " + KEY_DAILY_OR_WEEKLY + " integer default " + DAILY + ", " + KEY_MAXIMUM_REMINDERS + " integer default " 
+			+ DEFAULT_TIMES_OF_REPETITION + ", " + KEY_NUMBER_OF_REPETITIONS + " integer deault '0'" + ", " + KEY_START_TIME + " integer default " + DEFAULT_START_TIME + ", " + KEY_END_TIME + " integer default " 
 			+ DEFAULT_END_TIME + ")";
 	/*
 	public SqlDatabaseHelper(Context context, String table_name) {
@@ -120,6 +121,18 @@ public class SQL_DatabaseHelper extends SQLiteOpenHelper{
 		return cur;
 	}
 	
+	public Cursor getAllUnusedQuotesForTitle(String title){
+		
+		return db.query(TABLE_OF_QUOTES, new String[]{KEY_ID,  KEY_TEXT}, KEY_LIST_NAME + "=? and " + KEY_WAS_USED + "=?", 
+				new String[]{title, "0"}, null, null, null);
+	}
+	
+	public void setQuoteToUsed(String id){
+		ContentValues cv = new ContentValues();
+		cv.put(KEY_WAS_USED, 1);
+		db.update(TABLE_OF_QUOTES, cv, KEY_ID + "=?", new String[]{id});
+	}
+	
 	public String getSingleQuote(String id){
 		
 		return null;
@@ -143,6 +156,12 @@ public class SQL_DatabaseHelper extends SQLiteOpenHelper{
 		//this.TABLE_OF_QUOTES = tableName;
 		//SQLiteDatabase db = this.getWritableDatabase();
 		
+	}
+	
+	public void changeQuoteToUsed(String id){
+		ContentValues cv = new ContentValues();
+		cv.put(KEY_WAS_USED, 1);
+		db.update(TABLE_OF_QUOTES, cv, KEY_ID + "=?", new String[]{id});
 	}
 	
 	//--------------------------------------METHODS for TABLE_LISTS----------------------------------------------------------------------//
@@ -208,7 +227,7 @@ public class SQL_DatabaseHelper extends SQLiteOpenHelper{
 	
 	public void updateTitle(String title, String repetitions, String begin, String end){
 		ContentValues cv = new ContentValues();
-		cv.put(KEY_TIMES_OF_REPETITION, repetitions);
+		cv.put(KEY_MAXIMUM_REMINDERS, repetitions);
 		cv.put(KEY_START_TIME, begin);
 		cv.put(KEY_END_TIME, end);
 		db.update(TABLE_OF_LISTS, cv, KEY_LIST_NAME + " =?", new String[]{title});
@@ -216,7 +235,7 @@ public class SQL_DatabaseHelper extends SQLiteOpenHelper{
 	
 	public void updateTitle(String title, int repetitions, int begin, int end){
 		ContentValues cv = new ContentValues();
-		cv.put(KEY_TIMES_OF_REPETITION, repetitions);
+		cv.put(KEY_MAXIMUM_REMINDERS, repetitions);
 		cv.put(KEY_START_TIME, begin);
 		cv.put(KEY_END_TIME, end);
 		Log.d("SQL", title + " " + repetitions + " " + begin + end);

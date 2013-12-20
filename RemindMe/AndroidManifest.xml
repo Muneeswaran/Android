@@ -51,8 +51,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="hr.zbc.remindme.ActMainActivity" />
         </activity>
+        <activity
+            android:name="hr.zbc.remindme.A_NotificationReceiver"
+            android:label="@string/title_activity_a__notification_receiver" >
+        </activity>
     </application>
 
 </manifest>
-
-

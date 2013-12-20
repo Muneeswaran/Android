@@ -58,17 +58,19 @@ public final class R {
         public static final int tvSettingsNumberOfReminders=0x7f080002;
     }
     public static final class layout {
-        public static final int a_settings_daily_alarm=0x7f030000;
-        public static final int find_files_layout=0x7f030001;
-        public static final int list_details=0x7f030002;
-        public static final int main_layout=0x7f030003;
-        public static final int row_find_files=0x7f030004;
+        public static final int a__notification_receiver=0x7f030000;
+        public static final int a_settings_daily_alarm=0x7f030001;
+        public static final int find_files_layout=0x7f030002;
+        public static final int list_details=0x7f030003;
+        public static final int main_layout=0x7f030004;
+        public static final int row_find_files=0x7f030005;
     }
     public static final class menu {
-        public static final int a__settings_daily_alarm=0x7f070000;
-        public static final int find_files=0x7f070001;
-        public static final int list_details=0x7f070002;
-        public static final int main=0x7f070003;
+        public static final int a__notification_receiver=0x7f070000;
+        public static final int a__settings_daily_alarm=0x7f070001;
+        public static final int find_files=0x7f070002;
+        public static final int list_details=0x7f070003;
+        public static final int main=0x7f070004;
     }
     public static final class string {
         public static final int action_settings=0x7f050001;
@@ -100,9 +102,11 @@ public final class R {
         public static final int settings=0x7f050017;
         public static final int start=0x7f050013;
         public static final int start_this_list=0x7f050025;
+        public static final int stop=0x7f050027;
         public static final int sunday=0x7f050024;
         public static final int thursday=0x7f050021;
         public static final int time_interval=0x7f050019;
+        public static final int title_activity_a__notification_receiver=0x7f050026;
         public static final int title_activity_find_files=0x7f050006;
         public static final int title_activity_list_details=0x7f050011;
         public static final int title_already_exists=0x7f05000c;

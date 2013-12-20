@@ -25,13 +25,11 @@
     <string name="select...">Select...</string>
     <string name="delete">Delete</string>
     <string name="settings">Settings</string>
-    
     <string name="define_number_of_reminders">Define number of reminders</string>
     <string name="time_interval">Time interval</string>
     <string name="begin">Begin</string>
     <string name="end">End</string>
     <string name="choose_days">Choose days</string>
-    
     <string name="all_days">All days</string>
     <string name="monday">Monday</string>
     <string name="tuesday">Tuesday</string>
@@ -40,7 +38,8 @@
     <string name="friday">Friday</string>
     <string name="saturday">Saturday</string>
     <string name="sunday">Sunday</string>
-    
     <string name="start_this_list">Start this list</string>
+    <string name="title_activity_a__notification_receiver">Message</string>
+    <string name="stop">Stop</string>
 
 </resources>
